@@ -163,11 +163,9 @@ h2 {
     content: ">";
     display: inline-block;
     text-decoration: none;
-    }
+  }
 
-  .text::after, 
-  .text::after 
-  {
+  .text::after {
     content: "New";
     vertical-align: super;
     color: red;

@@ -100,7 +100,7 @@ h2 {
   }
 
   .tm-banner-text {
-    text-shadow: 0 10px 2px #76cdd7;
+    text-shadow: 0 10px 2px #76cdd7, 0 3px 1px #76cdd7, 1px 0 1px #76cdd7;
     animation-name: banner-rotate;
     animation-duration: 8s;
   }
@@ -161,16 +161,20 @@ h2 {
 
   .padding-medium li a:hover::before {
     content: ">";
-  }
+    display: inline-block;
+    text-decoration: none;
+    }
 
-  .heading li:nth-of-type(1)::after, 
-  .heading li:nth-of-type(3)::after 
+  .text::after, 
+  .text::after 
   {
     content: "New";
     vertical-align: super;
     color: red;
     font-weight: bold;
     font-size: xx-small;
+    display: inline-block;
+    text-decoration: none;
   }
 
   li.box-work {
@@ -228,13 +232,13 @@ h2 {
 
   input.form-control:focus,
   textarea:focus {
-    background-color: #76cdd7;
+    background-color: lightskyblue;
     color: #fff;
   }
 
   button.btn:hover {
-    border: 2px solid #20b2aa;
-    background-color: #20b2aa;
+    border: 2px solid transparent;
+    background-color: lightseagreen;
     color: #fff;
   }
 }

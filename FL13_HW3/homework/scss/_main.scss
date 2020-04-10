@@ -1,1 +1,221 @@
-// Write your styles here
+@mixin button {
+    font            : bold 22px $main-font-family;
+    color           : #fff;
+    background-color: $button-bg-color;
+    border          : none;
+    padding         : 15px 55px;
+}
+
+@mixin link($color, $font-size) {
+    font-size: $font-size;
+    color    : $color;
+}
+
+@mixin font-weight-size($weight, $size) {
+    font-weight: $weight;
+    font-size  : $size;
+}
+
+@mixin margin-top-bottom($top, $bottom) {
+    margin-top   : $top;
+    margin-bottom: $bottom;
+}
+
+@mixin selection($left, $top, $width, $height: 63px) {
+    &::before {
+        content         : "";
+        background-color: $selection-color;
+        position        : absolute;
+        left            : $left;
+        top             : $top;
+        width           : $width;
+        height          : $height;
+    }
+}
+
+.flex-align-item-center {
+    display    : flex;
+    align-items: center;
+}
+
+body {
+    font-family     : $main-font-family;
+    color           : $body-color;
+    background-color: $body-bg-color;
+    width       : 1920px;
+    padding         : 0;
+    margin          : 0;
+}
+
+header {
+    background                : $header-image center/100% no-repeat;
+    border-bottom-right-radius: 760px 360px;
+    height                    : 880px;
+    padding                   : 20px 0 0 191px;
+    @include selection(191px, 289px, 380px);
+}
+
+.landing-logo {
+    display    : flex;
+    align-items: start;
+    text-align : center;
+
+    img {
+        width     : 57px;
+        margin-top: 5px;
+    }
+
+    p {
+        display    : inline-block;
+        font       : bold 1.9em $second-font-family;
+        line-height: 27px;
+        margin     : 0 0 0 17px;
+        padding-top: 10px;
+
+        span {
+            display  : block;
+            font-size: 13px;
+        }
+    }
+}
+
+.header_heading {
+    @include font-weight-size(bold, 90px);
+    line-height : 90px;
+    word-spacing: 1px;
+    width       : 50%;
+    position    : relative;
+    @include margin-top-bottom(87px, 45px);
+}
+
+.header_text {
+    font         : 20px $second-font-family;
+    word-spacing : 4px;
+    white-space  : pre;
+    line-height  : 30px;
+    margin-bottom: 45px;
+    margin-left  : -143px;
+}
+
+.header_button {
+    @include button;
+}
+
+.login {
+    @include link(#fff, 25px);
+    padding-left: 190px;
+}
+
+main {
+    @extend .flex-align-item-center;
+    flex-direction: column;
+    position      : relative;
+    @include selection(969px, 39px, 237px);
+}
+
+.section_text {
+    @include font-weight-size(600, 327%);
+    @include margin-top-bottom(45px, 48px);
+    position: relative;
+}
+
+.section_card_wrap {
+    color: #fff;
+    width: 1125px;
+}
+
+.section_card {
+    display         : flex;
+    align-content   : space-between;
+    background-color: $card-bg-color;
+    border-radius   : 5px;
+    height          : 295px;
+    margin-bottom   : 30px;
+    padding         : 25px 125px 25px 25px;
+
+    img {
+        flex-basis   : $card-img-flex-basis;
+        border-radius: 5px;
+        height       : 100%;
+        margin-right : $card-img-margin-right;
+    }
+
+}
+
+.section_card_right_container {
+    @extend .flex-align-item-center;
+    flex-direction: column;
+}
+
+.section_card_heading {
+    @include font-weight-size(600, 30px);
+    @include margin-top-bottom(35px, 5px);
+}
+
+.section_card_text {
+    font        : 19px $second-font-family;
+    line-height : 30px;
+    word-spacing: 3px;
+    text-align  : justify;
+    color       : #C0C0C0;
+}
+
+.section_link {
+    @include link(#C0C0C0, 20px);
+}
+
+.section_banner {
+    @extend .flex-align-item-center;
+    justify-content: space-between;
+    background     : linear-gradient(to right, map-get($gradients, start), map-get($gradients, end));
+    border-radius  : 7px;
+    width          : 943px;
+    height         : 180px;
+    margin-top     : 146px;
+    padding        : 0 128px;
+    transform      : translateX(-50%);
+    position       : absolute;
+    left           : 50%;
+    bottom         : -325px;
+    @include selection(279px, 15px, 81px);
+
+    .section_banner_heading {
+        @include font-weight-size(600, 39px);
+        @include margin-top-bottom(-26px, 0px);
+        position: relative;
+    }
+
+    .section_banner_text {
+        font : 20px $second-font-family;
+        color: #ACC3CE;
+        @include margin-top-bottom(20px, 0px);
+    }
+
+    .section_banner_button {
+        @include button;
+    }
+}
+
+footer {
+    font-family     : $second-font-family;
+    color           : #C0C3CE;
+    background-color: #21232E;
+    height          : 305px;
+    margin-top      : 233px;
+}
+
+.footer-wrap {
+    @extend .flex-align-item-center;
+    padding        : $footer-wrap-padding;
+    padding-bottom : 0;
+    justify-content: space-between;
+
+    .footer_text {
+        font-size : 18px;
+        flex-basis: 403px;
+    }
+
+    span {
+        font-size: 20px;
+    }
+}

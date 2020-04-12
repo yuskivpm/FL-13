@@ -1,4 +1,4 @@
-.flex-align-item-center, main, .section_card_right_container, .section_banner, .footer-wrap {
+.flex-align-item-center, main, .section_card_wrap .section_card .section_card_right_container, .section_banner, .footer-wrap {
   display: flex;
   align-items: center; }
 
@@ -23,53 +23,48 @@ header {
     top: 289px;
     width: 380px;
     height: 63px; }
-
-.landing-logo {
-  display: flex;
-  align-items: start;
-  text-align: center; }
-  .landing-logo img {
-    width: 57px;
-    margin-top: 5px; }
-  .landing-logo p {
-    display: inline-block;
-    font: bold 1.9em "Hind", sans-serif;
-    line-height: 27px;
-    margin: 0 0 0 17px;
-    padding-top: 10px; }
-    .landing-logo p span {
-      display: block;
-      font-size: 13px; }
-
-.header_heading {
-  font-weight: bold;
-  font-size: 90px;
-  line-height: 90px;
-  word-spacing: 1px;
-  width: 50%;
-  position: relative;
-  margin-top: 87px;
-  margin-bottom: 45px; }
-
-.header_text {
-  font: 20px "Hind", sans-serif;
-  word-spacing: 4px;
-  white-space: pre;
-  line-height: 30px;
-  margin-bottom: 45px;
-  margin-left: -143px; }
-
-.header_button {
-  font: bold 22px "Source Sans Pro", sans-serif;
-  color: #fff;
-  background-color: #699900;
-  border: none;
-  padding: 15px 55px; }
-
-.login {
-  font-size: 25px;
-  color: #fff;
-  padding-left: 190px; }
+  header .landing-logo {
+    display: flex;
+    align-items: start;
+    text-align: center; }
+    header .landing-logo img {
+      width: 57px;
+      margin-top: 5px; }
+    header .landing-logo p {
+      display: inline-block;
+      font: bold 1.9em "Hind", sans-serif;
+      line-height: 27px;
+      margin: 0 0 0 17px;
+      padding-top: 10px; }
+      header .landing-logo p span {
+        display: block;
+        font-size: 13px; }
+  header .header_heading {
+    font-weight: bold;
+    font-size: 90px;
+    line-height: 90px;
+    word-spacing: 1px;
+    width: 50%;
+    position: relative;
+    margin-top: 87px;
+    margin-bottom: 45px; }
+  header .header_text {
+    font: 20px "Hind", sans-serif;
+    word-spacing: 4px;
+    white-space: pre;
+    line-height: 30px;
+    margin-bottom: 45px;
+    margin-left: -143px; }
+  header .header_button {
+    font: bold 22px "Source Sans Pro", sans-serif;
+    color: #fff;
+    background-color: #699900;
+    border: none;
+    padding: 15px 55px; }
+  header .login {
+    font-size: 25px;
+    color: #fff;
+    padding-left: 190px; }
 
 main {
   flex-direction: column;
@@ -82,51 +77,45 @@ main {
     top: 39px;
     width: 237px;
     height: 63px; }
-
-.section_text {
-  font-weight: 600;
-  font-size: 327%;
-  margin-top: 45px;
-  margin-bottom: 48px;
-  position: relative; }
+  main .section_text {
+    font-weight: 600;
+    font-size: 327%;
+    margin-top: 45px;
+    margin-bottom: 48px;
+    position: relative; }
 
 .section_card_wrap {
   color: #fff;
   width: 1125px; }
-
-.section_card {
-  display: flex;
-  align-content: space-between;
-  background-color: #000;
-  border-radius: 5px;
-  height: 295px;
-  margin-bottom: 30px;
-  padding: 25px 125px 25px 25px; }
-  .section_card img {
-    flex-basis: 140%;
+  .section_card_wrap .section_card {
+    display: flex;
+    align-content: space-between;
+    background-color: #000;
     border-radius: 5px;
-    height: 100%;
-    margin-right: 100px; }
-
-.section_card_right_container {
-  flex-direction: column; }
-
-.section_card_heading {
-  font-weight: 600;
-  font-size: 30px;
-  margin-top: 35px;
-  margin-bottom: 5px; }
-
-.section_card_text {
-  font: 19px "Hind", sans-serif;
-  line-height: 30px;
-  word-spacing: 3px;
-  text-align: justify;
-  color: #C0C0C0; }
-
-.section_link {
-  font-size: 20px;
-  color: #C0C0C0; }
+    height: 295px;
+    margin-bottom: 30px;
+    padding: 25px 125px 25px 25px; }
+    .section_card_wrap .section_card img {
+      flex-basis: 140%;
+      border-radius: 5px;
+      height: 100%;
+      margin-right: 100px; }
+    .section_card_wrap .section_card .section_card_right_container {
+      flex-direction: column; }
+      .section_card_wrap .section_card .section_card_right_container .section_card_heading {
+        font-weight: 600;
+        font-size: 30px;
+        margin-top: 35px;
+        margin-bottom: 5px; }
+      .section_card_wrap .section_card .section_card_right_container .section_card_text {
+        font: 19px "Hind", sans-serif;
+        line-height: 30px;
+        word-spacing: 3px;
+        text-align: justify;
+        color: #C0C0C0; }
+      .section_card_wrap .section_card .section_card_right_container .section_link {
+        font-size: 20px;
+        color: #C0C0C0; }
 
 .section_banner {
   justify-content: space-between;

@@ -53,57 +53,57 @@ header {
     height                    : 880px;
     padding                   : 20px 0 0 191px;
     @include selection(191px, 289px, 380px);
-}
 
-.landing-logo {
-    display    : flex;
-    align-items: start;
-    text-align : center;
+    .landing-logo {
+        display    : flex;
+        align-items: start;
+        text-align : center;
 
-    img {
-        width     : 57px;
-        margin-top: 5px;
-    }
+        img {
+            width     : 57px;
+            margin-top: 5px;
+        }
 
-    p {
-        display    : inline-block;
-        font       : bold 1.9em $second-font-family;
-        line-height: 27px;
-        margin     : 0 0 0 17px;
-        padding-top: 10px;
+        p {
+            display    : inline-block;
+            font       : bold 1.9em $second-font-family;
+            line-height: 27px;
+            margin     : 0 0 0 17px;
+            padding-top: 10px;
 
-        span {
-            display  : block;
-            font-size: 13px;
+            span {
+                display  : block;
+                font-size: 13px;
+            }
         }
     }
-}
 
-.header_heading {
-    @include font-weight-size(bold, 90px);
-    line-height : 90px;
-    word-spacing: 1px;
-    width       : 50%;
-    position    : relative;
-    @include margin-top-bottom(87px, 45px);
-}
+    .header_heading {
+        @include font-weight-size(bold, 90px);
+        line-height : 90px;
+        word-spacing: 1px;
+        width       : 50%;
+        position    : relative;
+        @include margin-top-bottom(87px, 45px);
+    }
 
-.header_text {
-    font         : 20px $second-font-family;
-    word-spacing : 4px;
-    white-space  : pre;
-    line-height  : 30px;
-    margin-bottom: 45px;
-    margin-left  : -143px;
-}
+    .header_text {
+        font         : 20px $second-font-family;
+        word-spacing : 4px;
+        white-space  : pre;
+        line-height  : 30px;
+        margin-bottom: 45px;
+        margin-left  : -143px;
+    }
 
-.header_button {
-    @include button;
-}
+    .header_button {
+        @include button;
+    }
 
-.login {
-    @include link(#fff, 25px);
-    padding-left: 190px;
+    .login {
+        @include link(#fff, 25px);
+        padding-left: 190px;
+    }
 }
 
 main {
@@ -111,58 +111,61 @@ main {
     flex-direction: column;
     position      : relative;
     @include selection(969px, 39px, 237px);
-}
 
-.section_text {
-    @include font-weight-size(600, 327%);
-    @include margin-top-bottom(45px, 48px);
-    position: relative;
+    .section_text {
+        @include font-weight-size(600, 327%);
+        @include margin-top-bottom(45px, 48px);
+        position: relative;
+    }
+
 }
 
 .section_card_wrap {
     color: #fff;
     width: 1125px;
-}
 
-.section_card {
-    display         : flex;
-    align-content   : space-between;
-    background-color: $card-bg-color;
-    border-radius   : 5px;
-    height          : 295px;
-    margin-bottom   : 30px;
-    padding         : 25px 125px 25px 25px;
+    .section_card {
+        display         : flex;
+        align-content   : space-between;
+        background-color: $card-bg-color;
+        border-radius   : 5px;
+        height          : 295px;
+        margin-bottom   : 30px;
+        padding         : 25px 125px 25px 25px;
 
-    img {
-        flex-basis   : $card-img-flex-basis;
-        border-radius: 5px;
-        height       : 100%;
-        margin-right : $card-img-margin-right;
+        img {
+            flex-basis   : $card-img-flex-basis;
+            border-radius: 5px;
+            height       : 100%;
+            margin-right : $card-img-margin-right;
+        }
+
+        .section_card_right_container {
+            @extend .flex-align-item-center;
+            flex-direction: column;
+
+            .section_card_heading {
+                @include font-weight-size(600, 30px);
+                @include margin-top-bottom(35px, 5px);
+            }
+
+            .section_card_text {
+                font        : 19px $second-font-family;
+                line-height : 30px;
+                word-spacing: 3px;
+                text-align  : justify;
+                color       : #C0C0C0;
+            }
+
+            .section_link {
+                @include link(#C0C0C0, 20px);
+            }
+        }
     }
-
 }
 
-.section_card_right_container {
-    @extend .flex-align-item-center;
-    flex-direction: column;
-}
 
-.section_card_heading {
-    @include font-weight-size(600, 30px);
-    @include margin-top-bottom(35px, 5px);
-}
 
-.section_card_text {
-    font        : 19px $second-font-family;
-    line-height : 30px;
-    word-spacing: 3px;
-    text-align  : justify;
-    color       : #C0C0C0;
-}
-
-.section_link {
-    @include link(#C0C0C0, 20px);
-}
 
 .section_banner {
     @extend .flex-align-item-center;

@@ -54,30 +54,6 @@ header {
     padding                   : 20px 0 0 191px;
     @include selection(191px, 289px, 380px);
 
-    .landing-logo {
-        display    : flex;
-        align-items: start;
-        text-align : center;
-
-        img {
-            width     : 57px;
-            margin-top: 5px;
-        }
-
-        p {
-            display    : inline-block;
-            font       : bold 1.9em $second-font-family;
-            line-height: 27px;
-            margin     : 0 0 0 17px;
-            padding-top: 10px;
-
-            span {
-                display  : block;
-                font-size: 13px;
-            }
-        }
-    }
-
     .header_heading {
         @include font-weight-size(bold, 90px);
         line-height : 90px;
@@ -103,6 +79,30 @@ header {
     .login {
         @include link(#fff, 25px);
         padding-left: 190px;
+    }
+}
+
+.landing-logo {
+    display    : flex;
+    align-items: start;
+    text-align : center;
+
+    img {
+        width     : 57px;
+        margin-top: 5px;
+    }
+
+    p {
+        display    : inline-block;
+        font       : bold 1.9em $second-font-family;
+        line-height: 27px;
+        margin     : 0 0 0 17px;
+        padding-top: 10px;
+
+        span {
+            display  : block;
+            font-size: 13px;
+        }
     }
 }
 
@@ -163,9 +163,6 @@ main {
         }
     }
 }
-
-
-
 
 .section_banner {
     @extend .flex-align-item-center;

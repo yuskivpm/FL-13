@@ -23,22 +23,6 @@ header {
     top: 289px;
     width: 380px;
     height: 63px; }
-  header .landing-logo {
-    display: flex;
-    align-items: start;
-    text-align: center; }
-    header .landing-logo img {
-      width: 57px;
-      margin-top: 5px; }
-    header .landing-logo p {
-      display: inline-block;
-      font: bold 1.9em "Fresca", sans-serif;
-      line-height: 27px;
-      margin: 0 0 0 17px;
-      padding-top: 10px; }
-      header .landing-logo p span {
-        display: block;
-        font-size: 13px; }
   header .header_heading {
     font-weight: bold;
     font-size: 90px;
@@ -65,6 +49,23 @@ header {
     font-size: 25px;
     color: #fff;
     padding-left: 190px; }
+
+.landing-logo {
+  display: flex;
+  align-items: start;
+  text-align: center; }
+  .landing-logo img {
+    width: 57px;
+    margin-top: 5px; }
+  .landing-logo p {
+    display: inline-block;
+    font: bold 1.9em "Fresca", sans-serif;
+    line-height: 27px;
+    margin: 0 0 0 17px;
+    padding-top: 10px; }
+    .landing-logo p span {
+      display: block;
+      font-size: 13px; }
 
 main {
   flex-direction: column;

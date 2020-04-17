@@ -1,14 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zxx">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="./css/styles.css">
-  <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>      
-  <title>Responsive</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700&subset=latin,latin-ext' rel='stylesheet'
+        type='text/css'>
+    <title>Responsive</title>
 </head>
+
 <body>
-  <!-- Your code goes here -->
+    <header>
+        <div>
+            <span id="mobile-menu">&equiv;</span>
+            <nav id="desktop-menu">
+                <a href="#">Blog</a>
+                <a href="#">About</a>
+                <a href="#">Archive</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+        <div id="logo">Travel<span>Blog</span></div>
+    </header>
+
+    <main>
+        <div id="main-content">
+            <section id="posts" aria-label="Posts">
+                <article class="post post-1">
+                    <div class="post-image">
+                        <img src="img/post1.jpg" alt="Travel blog">
+                    </div>
+                    <div class="post-text">
+                        <div class="text-only">
+                            <h2>My amazing travel blog</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla aperiam, consequatur culpa
+                                nisi
+                                asperiores consequuntur explicabo nam, voluptatibus tempore non placeat tempora delectus
+                                deleniti, alias sed voluptates dolores nesciunt.</p>
+                        </div>
+                        <div class="post-date">07 <span>mar</span></div>
+                    </div>
+                </article>
+
+                <article class="post post-2">
+                    <div class="post-image">
+                        <img src="img/post2.jpg" alt="Travel tips">
+                    </div>
+                    <div class="post-text">
+                        <div class="text-only">
+                            <h2>Top 10 travel tips</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla aperiam, consequatur culpa
+                                nisi
+                                asperiores consequuntur explicabo nam, voluptatibus tempore non placeat tempora delectus
+                                deleniti, alias sed voluptates dolores nesciunt.</p>
+                        </div>
+                        <div class="post-date">06 <span>mar</span></div>
+                    </div>
+                </article>
+
+                <article class="post post-3">
+                    <div class="post-image">
+                        <img src="img/post3.jpg" alt="Minimalist travel">
+                    </div>
+                    <div class="post-text">
+                        <div class="text-only">
+                            <h2>Nice minimalist travel</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla aperiam, consequatur culpa
+                                nisi
+                                asperiores consequuntur explicabo nam, voluptatibus tempore non placeat tempora delectus
+                                deleniti, alias sed voluptates dolores nesciunt.</p>
+                        </div>
+                        <div class="post-date">04 <span>mar</span></div>
+                    </div>
+                </article>
+
+                <article class="post post-4">
+                    <div class="post-image">
+                        <img src="img/post4.jpg" alt="Amazing regions">
+                    </div>
+                    <div class="post-text">
+                        <div class="text-only">
+                            <h2>With amazing regions</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla aperiam, consequatur culpa
+                                nisi
+                                asperiores consequuntur explicabo nam, voluptatibus tempore non placeat tempora delectus
+                                deleniti, alias sed voluptates dolores nesciunt.</p>
+                        </div>
+                        <div class="post-date">01 <span>mar</span></div>
+                    </div>
+                </article>
+            </section>
+
+            <article id="last-post" class="post post-text">
+                <h2>And again - it's totally amazing</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla aperiam, consequatur culpa nisi
+                    asperiores consequuntur explicabo nam, voluptatibus tempore non placeat tempora delectus deleniti,
+                    alias sed voluptates dolores nesciunt.</p>
+            </article>
+        </div>
+        <aside id="news-section" aria-label="News">
+            <article class="news">
+                <img src="img/news1.jpg" alt="Breaking news">
+                <div class="news-text">
+                    <h3>Breaking news</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto eius explicabo perferendis maxime,
+                        ad enim, asperiores modi inventore eligendi dignissimos consequatur dolores placeat, nisi omnis
+                        quas. Non totam in impedit?</p>
+                    <a href="#" class="learn-it">LEARN MORE...</a>
+                </div>
+            </article>
+
+            <article class="news">
+                <img src="img/news2.jpg" alt="Second news">
+                <div class="news-text">
+                    <h3>Second news on the Travel blog</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto eius explicabo perferendis maxime,
+                        ad enim, asperiores modi inventore eligendi dignissimos consequatur dolores placeat, nisi omnis
+                        quas. Non totam in impedit?</p>
+                    <a href="#" class="learn-it">LEARN MORE...</a>
+                </div>
+            </article>
+        </aside>
+    </main>
+
+    <footer>
+        <div>
+            <p>Copyright 2020, Epam systems</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+        </div>
+        <div>
+            <p>Design and coding</p>
+            <p>by name</p>
+        </div>
+    </footer>
+
 </body>
+
 </html>

@@ -1,31 +1,353 @@
-/*
- * Feel free to change name of colors if you need it
- * Feel free to add new colors if you need it
- */
-
-:root {
-  --bg-color--dark: #0b192f;
-  --bg-color--medium: #162b4d;
-  --text--color: #484848;
-  --link: #fff;
-  --link--hover: #b8b8b8;
+* {
+    box-sizing: border-box;
 }
 
 body {
-  font-family: roboto;
+    width: 100%;
+    margin: 0;
+    padding: 0 1rem;
+    color: #484848;
+    background-color: #0b192f;
+    font-family: roboto;
 }
 
 .post-1 {
-	background: #F3D250;
-}
-.post-2 {
-	background: #8D8741;
-}
-.post-3 {
-	background: #659DBD;
-}
-.post-4 {
-	background: #DAAD86;
+    background: #f3d250;
 }
 
-/* Your styles go here */
+.post-2 {
+    background: #8d8741;
+}
+
+.post-3 {
+    background: #659dbd;
+}
+
+.post-4 {
+    background: #daad86;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    background-color: #162b4d;
+    color: #fff;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 35px;
+}
+
+#desktop-menu {
+    display: none;
+}
+
+#mobile-menu {
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 2rem;
+}
+
+#logo {
+    margin-bottom: 15px;
+    font-size: 55px;
+}
+
+#logo span {
+    color: #7f184f;
+}
+
+main,
+section,
+article,
+img {
+    width: 100%;
+}
+
+.post {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.post-text {
+    padding: 3rem 3.4rem;
+}
+
+.post-text h2 {
+    font-weight: 100;
+    margin: 0;
+}
+
+.post-text p {
+    font-size: 1.3rem;
+    margin-bottom: 0;
+}
+
+.post-date {
+    font-weight: 300;
+    text-align: center;
+    font-size: 3.3rem;
+}
+
+.post-date span {
+    font-size: 2.3rem;
+}
+
+#last-post {
+    background-image: url(../img/post5.jpg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    padding: 11.5rem 2rem 16rem;
+}
+
+.news-text {
+    padding: 3rem;
+    padding-bottom: 3.6rem;
+    background-color: #fff;
+    margin-bottom: 2.4rem;
+}
+
+.news-text h3 {
+    font-size: 2.6rem; 
+    font-weight: 300;
+    margin: 0;
+}
+
+.news-text p {
+    font-size: 1.3rem; 
+    line-height: 2.3rem; 
+    margin-top: 3rem;
+    margin-bottom: 3.3rem; 
+}
+
+.news-text a {
+    color: #000;
+    text-decoration: none;
+    border: 1px solid black;
+    padding: 0.9rem 1.6rem; 
+}
+
+footer {
+    color: #fff;
+    background-color: #162b4d;
+    text-align: center;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3rem;
+    padding-top: 4.7rem;
+    line-height: 1.2rem;
+    padding-bottom: 2rem;
+}
+
+@media screen and (max-width: 767px) {
+
+    header {
+        height: 19rem;
+    }
+
+    .post {
+        padding-bottom: 0.3rem;
+        margin-bottom: 0.1rem;
+    }
+
+    .post-text h2 {
+        line-height: 4.9rem;
+        font-size: 3.9rem;
+    }
+
+    .post-text p {
+        line-height: 2.3rem;
+        margin-top: 1.1rem;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1399px) {
+
+    header {
+        height: 18rem;
+        margin-bottom: 26px;
+    }
+
+    main {
+        display: flex;
+    }
+
+    #main-content {
+        flex: 2;
+        margin-right: 2rem;
+    }
+
+    #news-section {
+        flex: 1 0 4%;
+    }
+
+    .post-text h2 {
+        line-height: 4.5rem;
+        font-size: 3.5rem;
+    }
+
+    .post-text p {
+        font-size: 1.2rem;
+        line-height: 2.1rem;
+        margin-top: 0.8rem;
+    }
+
+    .news-text h3 {
+        font-size: 2.4rem;
+    }
+    .news-text p {
+        font-size: 1.1rem;
+        line-height: 2.1rem;
+        margin-top: 2.6rem;
+    }
+
+    .news-text a {
+        padding: 0.7rem 1.1rem;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    
+    #mobile-menu {
+        display: none;
+    }
+
+    body {
+        padding: 0 5rem;
+    }
+
+    header {
+        height: 9rem;
+        padding-left: 2rem;
+        padding-right: 7rem;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    #desktop-menu {
+        display: flex;
+    }
+
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.7rem;
+        padding: 0 3rem;
+        line-height: 9rem;
+    }
+
+    main {
+        display: flex;
+    }
+
+    #main-content {
+        flex: 4;
+        margin-right: 2rem;
+    }
+
+    #news-section {
+        flex: 1 0 4%;
+    }
+
+    article.post {
+        display: flex;
+    }
+
+    article.post:nth-of-type(even) {
+        display: flex;
+        flex-direction: row-reverse;
+        text-align: right;
+    }
+
+    .post-image,
+    .post-text {
+        flex: 1 0 50%;
+    }
+
+    .post-image img {
+        height: 100%;
+    }
+
+    .post-text {
+        display: flex;
+        flex-wrap: wrap;
+        padding-right: 2rem;
+        justify-content: space-between;
+    }
+
+    .text-only {
+        order: 1;
+        width: 80%;
+    }
+
+    .post-text h2 {
+        font-size: 3.4rem;
+        line-height: 4.3rem;
+    }
+
+    .post-text p {
+        order: 3;
+        line-height: 2.8rem;
+        margin-top: 2rem;
+    }
+
+    .post-date {
+        display: inline-block;
+        order: 2;
+        font-size: 4rem;
+        margin-top: -1rem;
+    }
+
+    .post-date span {
+        display: block;
+    }
+
+    article.post:nth-of-type(even) .post-text {
+        padding-left: 2rem;
+        padding-right: 3rem;
+        flex-direction: row-reverse;
+    }
+
+    #last-post {
+        padding: 19.5rem 2rem 8rem;
+    }
+
+    footer {
+        margin-top: 2rem;
+        color: #484848;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        text-align: left;
+    }
+}
+
+#mobile-menu:hover,
+nav a:hover {
+    background-color: #445577;
+    color: #c25c5c;
+    transition: background-color 0.5s linear;
+    cursor: pointer;
+}
+
+.learn-it:hover {
+    transition: border 0.5s linear;
+    border: 1px solid transparent;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#posts .post-image:hover {
+    transition: opacity 0.5s linear;
+    opacity: 0.5;
+}
+#posts .post-text:hover {
+    opacity: 0.3;
+    transition: opacity 0.5s linear;
+}

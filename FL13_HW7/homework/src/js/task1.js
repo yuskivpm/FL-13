@@ -1,5 +1,6 @@
 const MIN_LOGIN_LENGTH = 4;
-const EVENING_HOURS = 20;
+const DAY_START = 8;
+const DAY_END = 20;
 
 const usersDB = { 'User': 'UserPass', 'Admin': 'RootPass' };
 
@@ -19,6 +20,6 @@ if (!userLogin) {
     alert('Wrong password');
   } else {
     const hour = new Date().getHours();
-    alert(`Good ${hour < EVENING_HOURS ? 'day' : 'evening'}, dear ${userLogin}!`);
+    alert(`Good ${hour >= DAY_START && hour < DAY_END ? 'day' : 'evening'}, dear ${userLogin}!`);
   }
 }

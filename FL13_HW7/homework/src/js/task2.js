@@ -47,5 +47,5 @@ if (!confirm('Do you want to play a game?')) {
     } while (roundAttemptsCount);
 
     alert(`Thank you for your participation. your prize is: ${totalPrize}$`);
-  } while (confirm('Do you want to continue?'));
+  } while (confirm('Do you want to play again?'));
 }

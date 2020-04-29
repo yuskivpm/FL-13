@@ -1,7 +1,4 @@
-const letterCount = (text, searchChar) => text
-  .toLowerCase()
-  .split('')
-  .reduce((count, item) => item === searchChar ? ++count : count, 0);
+const letterCount = (text, subString) => subString ? text.toLowerCase().split(subString).length - 1 : 0;
 
 console.log(letterCount("Maggy", "g"));
 console.log(letterCount("Barry", "b"));

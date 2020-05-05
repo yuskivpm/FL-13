@@ -1,6 +1,5 @@
-const MAX_PROBABILITY = 100;
-
 function Fighter({ name, damage, hp, strength, agility }) {
+  const MAX_PROBABILITY = 100;
   let health = hp;
   let wins = 0;
   let losses = 0;

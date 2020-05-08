@@ -1,1 +1,49 @@
-/* TODO: your styles goes here*/
+.material-icons {
+    vertical-align: sub;
+}
+
+.folder.folded i::before {
+    content: 'folder';
+    color: #edbc0b;
+}
+
+.folder i::before {
+    content: 'folder_open';
+    color: #edbc0b;
+}
+
+.file i::before {
+    content: 'insert_drive_file';
+    color: #b0b0b0;
+}
+
+.folder + div {
+    margin-left: 40px;
+}
+
+.folder.folded + div {
+    display: none;
+}
+
+p:hover,
+.focussed {
+    background-color: #e3e3e3;
+}
+
+.context-menu {
+    position: absolute;
+    width: fit-content;
+    padding: 10px;
+    z-index: 10;
+    background-color: #f7f7f7;
+}
+
+.context-menu div:hover {
+    background-color: #ddd;
+}
+
+p,
+.context-menu div {
+    margin: 0;
+    padding: 0 5px;
+}

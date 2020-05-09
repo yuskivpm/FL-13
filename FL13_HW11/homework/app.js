@@ -53,14 +53,15 @@ const data = [
 const rootNode = document.getElementById('root');
 const contextMenu = rootNode.appendChild(document.createElement('div'));
 
+let elementUnderContextMenu;
+
 const FOLDER_CLASS_NAME = 'folder';
 const FOCUSSED_CLASS_NAME = 'focussed';
+
 const CONTEXT_MENU_ITEMS = [
   { name: 'Rename', handler: handleRenameClick },
   { name: 'Delete item', handler: handleDeleteClick }
 ];
-
-let elementUnderContextMenu;
 
 const getTarget = event => event.currentTarget || event.target || event.srcElement;
 
@@ -69,8 +70,8 @@ const addEmptyFolderElement = parentNode => parentNode
   .appendChild(document.createTextNode('Folder is empty'));
 
 const generateTree = (itemsArray, parentNode) => itemsArray
-  .forEach((item, index, array, ownerNode = parentNode) => {
-    const paragraphElement = ownerNode.appendChild(document.createElement('p'));
+  .forEach((item) => {
+    const paragraphElement = parentNode.appendChild(document.createElement('p'));
     paragraphElement.className = item.folder ? 'folder folded' : 'file';
     paragraphElement.appendChild(document.createElement('i')).className = 'material-icons';
     const spanElement = paragraphElement.appendChild(document.createElement('span'));
@@ -79,7 +80,7 @@ const generateTree = (itemsArray, parentNode) => itemsArray
     spanElement.appendChild(document.createTextNode(item.title));
     if (item.folder) {
       paragraphElement.addEventListener('click', event => getTarget(event).classList.toggle('folded'));
-      const div = ownerNode.appendChild(document.createElement('div'));
+      const div = parentNode.appendChild(document.createElement('div'));
       item.children ? generateTree(item.children, div) : addEmptyFolderElement(div);
     }
   });
@@ -117,6 +118,12 @@ function showContextMenu(event) {
     contextMenu.style.pointerEvents = 'none';
   }
   contextMenu.hidden = false;
+  function getParentParagraphElement(target) {
+    while (target && target.nodeName !== 'P') {
+      target = target.parentElement;
+    }
+    return target || {};
+  }
 }
 
 function hideContextMenu() {
@@ -125,25 +132,6 @@ function hideContextMenu() {
   }
   elementUnderContextMenu = undefined;
   contextMenu.hidden = true;
-}
-
-function getParentParagraphElement(target) {
-  while (target && target.nodeName !== 'P') {
-    target = target.parentElement;
-  }
-  return target || {};
-}
-
-function selectText(element, isFolder) {
-  const range = document.createRange();
-  const textNode = element.firstChild;
-  const selection = window.getSelection();
-  range.selectNode(element);
-  range.setStart(textNode, 0);
-  const extensionStart = textNode.textContent.lastIndexOf('.');
-  range.setEnd(textNode, isFolder || extensionStart < 0 ? textNode.textContent.length : extensionStart);
-  selection.removeAllRanges();
-  selection.addRange(range);
 }
 
 function handleBlur(event) {
@@ -160,7 +148,20 @@ function handleRenameClick() {
   const editedElement = elementUnderContextMenu.lastChild
   editedElement.contentEditable = 'true';
   editedElement.focus();
-  selectText(editedElement, elementUnderContextMenu.className.startsWith(FOLDER_CLASS_NAME));
+  const range = document.createRange();
+  const textNode = editedElement.firstChild;
+  const selection = window.getSelection();
+  range.selectNode(editedElement);
+  range.setStart(textNode, 0);
+  const extensionStart = textNode.textContent.lastIndexOf('.');
+  range.setEnd(
+    textNode,
+    elementUnderContextMenu.className.startsWith(FOLDER_CLASS_NAME) || extensionStart < 0
+      ? textNode.textContent.length
+      : extensionStart
+  );
+  selection.removeAllRanges();
+  selection.addRange(range);
 }
 
 function handleDeleteClick() {

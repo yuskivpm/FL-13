@@ -1,15 +1,14 @@
 .material-icons {
     vertical-align: sub;
+    color: #edbc0b;
 }
 
 .folder.folded i::before {
     content: 'folder';
-    color: #edbc0b;
 }
 
 .folder i::before {
     content: 'folder_open';
-    color: #edbc0b;
 }
 
 .file i::before {

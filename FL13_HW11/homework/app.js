@@ -70,7 +70,7 @@ const addEmptyFolderElement = parentNode => parentNode
   .appendChild(document.createTextNode('Folder is empty'));
 
 const generateTree = (itemsArray, parentNode) => itemsArray
-  .forEach((item) => {
+  .forEach(item => {
     const paragraphElement = parentNode.appendChild(document.createElement('p'));
     paragraphElement.className = item.folder ? 'folder folded' : 'file';
     paragraphElement.appendChild(document.createElement('i')).className = 'material-icons';

@@ -70,33 +70,33 @@ const addEmptyFolderElement = parentNode => parentNode
   .appendChild(document.createTextNode('Folder is empty'));
 
 const generateTree = (itemsArray, parentNode) => itemsArray
-  .forEach(item => {
+  .forEach(({ title, folder, children }) => {
     const paragraphElement = parentNode.appendChild(document.createElement('p'));
-    paragraphElement.className = item.folder ? 'folder folded' : 'file';
+    paragraphElement.className = folder ? 'folder folded' : 'file';
     paragraphElement.appendChild(document.createElement('i')).className = 'material-icons';
     const spanElement = paragraphElement.appendChild(document.createElement('span'));
     spanElement.addEventListener('blur', handleBlur);
     spanElement.addEventListener('keypress', handleEnterKeyPress);
-    spanElement.appendChild(document.createTextNode(item.title));
-    if (item.folder) {
+    spanElement.appendChild(document.createTextNode(title));
+    if (folder) {
       paragraphElement.addEventListener('click', event => getTarget(event).classList.toggle('folded'));
       const div = parentNode.appendChild(document.createElement('div'));
-      item.children ? generateTree(item.children, div) : addEmptyFolderElement(div);
+      children ? generateTree(children, div) : addEmptyFolderElement(div);
     }
   });
 
 function createContextMenu(contextMenuNode, contextMenuItems) {
   contextMenu.className = 'context-menu';
   contextMenu.hidden = true;
-  for (const menuItem of contextMenuItems) {
+  contextMenuItems.forEach(({ name, handler }) => {
     const item = contextMenuNode.appendChild(document.createElement('div'));
-    item.appendChild(document.createTextNode(menuItem.name));
+    item.appendChild(document.createTextNode(name));
     item.addEventListener('click', () => {
       if (elementUnderContextMenu) {
-        menuItem.handler();
+        handler();
       }
-    });
-  }
+    })
+  });
 }
 
 function showContextMenu(event) {

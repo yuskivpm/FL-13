@@ -9,7 +9,7 @@ function Fighter({ name, damage, hp, strength, agility }) {
     getStrength: () => strength,
     getAgility: () => agility,
     getHealth: () => health,
-    attack: (defender) => {
+    attack: defender => {
       if (Math.random() * MAX_PROBABILITY > defender.getStrength() + defender.getAgility()) {
         defender.dealDamage(damage);
         console.log(`${name} makes ${damage} damage to ${defender.getName()}`);
@@ -18,10 +18,10 @@ function Fighter({ name, damage, hp, strength, agility }) {
       }
     },
     logCombatHistory: () => console.log(`Name: ${name}, Wins: ${wins}, Losses: ${losses}`),
-    heal: (healAmount) => {
+    heal: healAmount => {
       health = Math.min(hp, health + healAmount);
     },
-    dealDamage: (damageAmount) => {
+    dealDamage: damageAmount => {
       health = Math.max(0, health - damageAmount);
     },
     addWin: () => ++wins,

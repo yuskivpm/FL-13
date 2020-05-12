@@ -99,11 +99,19 @@ function createContextMenu(contextMenuNode, contextMenuItems) {
   });
 }
 
+function getParentParagraphElement(event) {
+  let target = event.target || event.srcElement;
+  while (target && target.nodeName !== 'P') {
+    target = target.parentElement;
+  }
+  return target || {};
+}
+
 function showContextMenu(event) {
   event.preventDefault();
   contextMenu.style.top = `${event.y}px`;
   contextMenu.style.left = `${event.x}px`;
-  const target = getParentParagraphElement(event.target || event.srcElement);
+  const target = getParentParagraphElement(event);
   if (elementUnderContextMenu) {
     elementUnderContextMenu.classList.remove(FOCUSSED_CLASS_NAME);
   }
@@ -118,12 +126,6 @@ function showContextMenu(event) {
     contextMenu.style.pointerEvents = 'none';
   }
   contextMenu.hidden = false;
-  function getParentParagraphElement(target) {
-    while (target && target.nodeName !== 'P') {
-      target = target.parentElement;
-    }
-    return target || {};
-  }
 }
 
 function hideContextMenu() {
@@ -136,6 +138,7 @@ function hideContextMenu() {
 
 function handleBlur(event) {
   getTarget(event).contentEditable = 'false';
+  getParentParagraphElement(event).classList.remove(FOCUSSED_CLASS_NAME);
 }
 
 function handleEnterKeyPress(event) {
@@ -145,7 +148,7 @@ function handleEnterKeyPress(event) {
 }
 
 function handleRenameClick() {
-  const editedElement = elementUnderContextMenu.lastChild
+  const editedElement = elementUnderContextMenu.lastChild;
   editedElement.contentEditable = 'true';
   editedElement.focus();
   const range = document.createRange();
@@ -162,6 +165,7 @@ function handleRenameClick() {
   );
   selection.removeAllRanges();
   selection.addRange(range);
+  elementUnderContextMenu = undefined;
 }
 
 function handleDeleteClick() {

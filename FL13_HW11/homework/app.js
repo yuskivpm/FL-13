@@ -99,12 +99,12 @@ function createContextMenu(contextMenuNode, contextMenuItems) {
   });
 }
 
-function getParentParagraphElement(event) {
-  let target = event.target || event.srcElement;
-  while (target && target.nodeName !== 'P') {
-    target = target.parentElement;
+function getParentParagraphElement({ target, srcElement }) {
+  let targetElement = target || srcElement;
+  while (targetElement && targetElement.nodeName !== 'P') {
+    targetElement = targetElement.parentElement;
   }
-  return target || {};
+  return targetElement || {};
 }
 
 function showContextMenu(event) {

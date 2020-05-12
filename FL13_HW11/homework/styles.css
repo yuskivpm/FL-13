@@ -1,3 +1,26 @@
+*:focus {
+    outline: none;
+}
+
+#root {
+    width: 50vw;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 8px #808080;
+}
+
+span:focus {
+    border: 1px solid #87cefa;
+}
+
+span {
+    display: inline-block;
+    width: 90%;
+    border: 1px solid transparent;
+    padding: 1px;
+}
+
 .material-icons {
     vertical-align: sub;
     color: #edbc0b;
@@ -16,16 +39,15 @@
     color: #b0b0b0;
 }
 
-.folder + div {
+.folder+div {
     margin-left: 40px;
 }
 
-.folder.folded + div {
+.folder.folded+div {
     display: none;
 }
 
-p:hover,
-.focussed {
+p:hover, .focussed {
     background-color: #e3e3e3;
 }
 
@@ -34,15 +56,16 @@ p:hover,
     width: fit-content;
     padding: 10px;
     z-index: 10;
+    border-radius: 3px;
     background-color: #f7f7f7;
+    box-shadow: 2px 2px 5px #808080;
 }
 
 .context-menu div:hover {
     background-color: #ddd;
 }
 
-p,
-.context-menu div {
+p, .context-menu div {
     margin: 0;
     padding: 0 5px;
 }

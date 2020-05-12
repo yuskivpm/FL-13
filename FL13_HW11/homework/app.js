@@ -63,8 +63,6 @@ const CONTEXT_MENU_ITEMS = [
   { name: 'Delete item', handler: handleDeleteClick }
 ];
 
-const getTarget = event => event.currentTarget || event.target || event.srcElement;
-
 const addEmptyFolderElement = parentNode => parentNode
   .appendChild(document.createElement('i'))
   .appendChild(document.createTextNode('Folder is empty'));
@@ -79,7 +77,7 @@ const generateTree = (itemsArray, parentNode) => itemsArray
     spanElement.addEventListener('keypress', handleEnterKeyPress);
     spanElement.appendChild(document.createTextNode(title));
     if (folder) {
-      paragraphElement.addEventListener('click', event => getTarget(event).classList.toggle('folded'));
+      paragraphElement.addEventListener('click', event => event.currentTarget.classList.toggle('folded'));
       const div = parentNode.appendChild(document.createElement('div'));
       children ? generateTree(children, div) : addEmptyFolderElement(div);
     }
@@ -99,23 +97,15 @@ function createContextMenu(contextMenuNode, contextMenuItems) {
   });
 }
 
-function getParentParagraphElement({ target, srcElement }) {
-  let targetElement = target || srcElement;
-  while (targetElement && targetElement.nodeName !== 'P') {
-    targetElement = targetElement.parentElement;
-  }
-  return targetElement || {};
-}
-
 function showContextMenu(event) {
   event.preventDefault();
   contextMenu.style.top = `${event.y}px`;
   contextMenu.style.left = `${event.x}px`;
-  const target = getParentParagraphElement(event);
+  const target = event.target.closest('p');
   if (elementUnderContextMenu) {
     elementUnderContextMenu.classList.remove(FOCUSSED_CLASS_NAME);
   }
-  if (target.nodeName === 'P') {
+  if (target) {
     elementUnderContextMenu = target;
     target.classList.add(FOCUSSED_CLASS_NAME);
     contextMenu.style.color = '#000';
@@ -136,9 +126,9 @@ function hideContextMenu() {
   contextMenu.hidden = true;
 }
 
-function handleBlur(event) {
-  getTarget(event).contentEditable = 'false';
-  getParentParagraphElement(event).classList.remove(FOCUSSED_CLASS_NAME);
+function handleBlur({ currentTarget, target }) {
+  currentTarget.contentEditable = 'false';
+  target.closest('p').classList.remove(FOCUSSED_CLASS_NAME);
 }
 
 function handleEnterKeyPress(event) {

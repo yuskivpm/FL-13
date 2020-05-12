@@ -93,7 +93,7 @@ function createContextMenu(contextMenuNode, contextMenuItems) {
       if (elementUnderContextMenu) {
         handler();
       }
-    })
+    });
   });
 }
 

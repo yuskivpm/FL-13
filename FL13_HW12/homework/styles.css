@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+#root {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    min-width: 550px;
+    padding: 10px;
+}
+
+.flex {
+    width: 50%;
+    margin: 0 10px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px grey;
+    background-color: mediumspringgreen;
+}
+
+.flex,
+#dynamic-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.book-holder {
+    display: flex;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    justify-content: space-between;
+    background-color: lawngreen;
+}
+
+.preview-id {
+    display: inline-block;
+    flex: 9 1 0;
+}
+
+.edit-id {
+    flex: 1 1 5rem;
+}
+
+.edit-id,
+.add-id {
+    display: inline-block;
+    text-align: center;
+    background-color: green;
+}
+
+a,
+a:visited,
+a:active {
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+a:hover,
+.new-button:hover {
+    color: blue;
+}
+
+.book-holder a:hover::before {
+    content: '>';
+}
+
+.book-holder a:hover::after {
+    content: '<';
+}
+
+#dynamic-page img {
+    width: 100%;
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.new-button {
+    padding: 10px 20px;
+    background-color: green;
+}
+
+.new-button,
+.book-holder,
+.edit-id,
+.add-id {
+    border: 1px solid black;
+    border-radius: 3px;
+    box-shadow: 2px 2px 3px grey;
+}
+
+.active {
+    background-color: yellow;
+}
+
+label {
+    font-size: 1.5rem;
+}
+
+.books-list {
+    height: calc(100% - 25px);
+    overflow: auto;
+}

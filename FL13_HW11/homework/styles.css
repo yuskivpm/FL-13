@@ -39,16 +39,18 @@ span {
     color: #b0b0b0;
 }
 
-.folder+div {
+.folder + div {
     margin-left: 40px;
 }
 
-.folder.folded+div {
+.folder.folded + div {
     display: none;
 }
 
-p:hover, .focussed {
+p:hover,
+.focussed {
     background-color: #e3e3e3;
+    cursor: pointer;
 }
 
 .context-menu {
@@ -65,7 +67,8 @@ p:hover, .focussed {
     background-color: #ddd;
 }
 
-p, .context-menu div {
+p,
+.context-menu div {
     margin: 0;
     padding: 0 5px;
 }

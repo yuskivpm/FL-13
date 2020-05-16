@@ -5,10 +5,6 @@ const APP_BOOKS_STORAGE_KEY = 'books';
 const DYNAMIC_PAGE_ID = 'dynamic-page';
 
 const EDIT_FORM_ID = 'new-id';
-const EDIT_FORM_NAME = 'new-name';
-const EDIT_FORM_AUTHOR = 'new-author';
-const EDIT_FORM_IMAGE = 'new-image';
-const EDIT_FORM_PLOT = 'new-plot';
 
 const ALERT_TIMEOUT = 300;
 
@@ -23,6 +19,13 @@ const COMMANDS = [
   { command: 'edit', render: renderEditPage }
 ];
 
+const formArray = [
+  { labelName: 'Book name', name: 'name' },
+  { labelName: 'Author name', name: 'author' },
+  { labelName: 'Image url', name: 'url', inputType: 'url' },
+  { labelName: 'Plot', name: 'plot', inputKind: 'textarea' }
+];
+
 const EMPTY_BOOK = { id: '', name: '', author: '', url: '', plot: '' };
 const BOOK_HOLDER_CLASS = { className: 'book-holder' };
 
@@ -33,8 +36,8 @@ const getBookById = bookId => books.find(({ id }) => id === bookId);
 const fillElement = (target, source) => Object.assign(target, source);
 const createElement = document.createElement.bind(document);
 
-const booksListPage = root.appendChild(createElement('div'));
-const booksListElement = booksListPage.appendChild(createElement('div'));
+const booksListPage = fillElement(root.appendChild(createElement('div')), { className: 'flex' });
+const booksListElement = fillElement(booksListPage.appendChild(createElement('div')), { className: 'books-list' });
 const dynamicPage = fillElement(root.appendChild(createElement('div')), { className: 'flex' });
 
 generateBooksElements();
@@ -50,8 +53,6 @@ function loadBooksFromStorage() {
 }
 
 function generateBooksElements() {
-  booksListPage.className = 'flex';
-  booksListElement.className = 'books-list';
   books.forEach(renderBookItem);
   booksListPage.appendChild(renderLink('add', location.pathname, 'Add'));
 }
@@ -99,7 +100,6 @@ function getCommandFromUrl() {
 function handleUrlChange(event) {
   if (event && event.preventDefault) {
     event.preventDefault();
-    event.stopPropagation();
   }
   const { commandId, bookId } = getCommandFromUrl();
   dynamicPage.innerHTML = '';
@@ -107,7 +107,9 @@ function handleUrlChange(event) {
   const activeId = `?id=${bookId}#preview`;
   booksListPage.querySelectorAll('a.active').forEach(({ classList }) => classList.remove('active'));
   booksListPage.querySelectorAll(`a[href$="${activeId}"]`).forEach(({ classList }) => classList.add('active'));
-  if (commandId === COMMAND_RENDER_EMPTY_PAGE && (location.search.length > 1 || location.hash.length > 1)) {
+  const hasIncorrectUrl = commandId === COMMAND_RENDER_EMPTY_PAGE
+    && (location.search.length > 1 || location.hash.length > 1);
+  if (hasIncorrectUrl) {
     history.replaceState(null, null, location.pathname);
   }
 }
@@ -123,26 +125,34 @@ function renderPreviewPage(bookId) {
 }
 
 function renderButton(buttonCaption, onClickHandler, parentElement) {
-  const buttonElement = parentElement.appendChild(createElement('input'));
-  fillElement(buttonElement, { type: 'button', value: buttonCaption, className: 'new-button' });
-  buttonElement.addEventListener('click', onClickHandler);
+  fillElement(
+    parentElement.appendChild(createElement('input')),
+    { type: 'button', value: buttonCaption, className: 'new-button' }
+  ).addEventListener('click', onClickHandler);
 }
 
-function renderLabeledInput(id, labelName, value, parentElement, inputType = 'input') {
+function renderLabeledInput({ labelName, name, inputKind = 'input', inputType = 'text' }, book, parentElement) {
+  const id = `new${name}`;
   parentElement.appendChild(createElementWithText('label', labelName)).htmlFor = id;
   parentElement.appendChild(createElement('br'));
-  fillElement(parentElement.appendChild(createElement(inputType)), { id, required: true, value });
+  const input = fillElement(
+    parentElement.appendChild(createElement(inputKind)),
+    { id, name, required: true, value: book[name] }
+  );
+  if (inputKind === 'input') {
+    input.setAttribute('type', inputType);
+  }
   parentElement.appendChild(createElement('br'));
 }
 
 function renderEditPage(bookId) {
-  const { id, name, author, url, plot } = getBookById(bookId) || EMPTY_BOOK;
+  const book = getBookById(bookId) || EMPTY_BOOK;
   const editFormPage = fillElement(createElement('form'), { id: DYNAMIC_PAGE_ID });
-  fillElement(editFormPage.appendChild(createElement('input')), { id: EDIT_FORM_ID, hidden: true, value: id });
-  renderLabeledInput(EDIT_FORM_NAME, 'Book name', name, editFormPage);
-  renderLabeledInput(EDIT_FORM_AUTHOR, 'Author name', author, editFormPage);
-  renderLabeledInput(EDIT_FORM_IMAGE, 'Image url', url, editFormPage);
-  renderLabeledInput(EDIT_FORM_PLOT, 'Plot', plot, editFormPage, 'textarea');
+  fillElement(
+    editFormPage.appendChild(createElement('input')),
+    { id: EDIT_FORM_ID, hidden: true, value: book.id, name: 'id' }
+  );
+  formArray.forEach(inputData => renderLabeledInput(inputData, book, editFormPage))
   const buttonsDiv = fillElement(editFormPage.appendChild(createElement('div')), { id: 'buttons' });
   renderButton('Save', saveBook, buttonsDiv);
   renderButton('Cancel', cancelSavingBook, buttonsDiv);
@@ -157,18 +167,22 @@ function cancelSavingBook() {
 
 function saveBook() {
   const editFormPage = document.forms[DYNAMIC_PAGE_ID];
-  const name = editFormPage[EDIT_FORM_NAME].value.trim();
-  const author = editFormPage[EDIT_FORM_AUTHOR].value.trim();
-  const url = editFormPage[EDIT_FORM_IMAGE].value.trim();
-  const plot = editFormPage[EDIT_FORM_PLOT].value.trim();
-  const book = { name, author, url, plot };
-  if (name && author && plot && url.startsWith('http')) {
-    const id = editFormPage[EDIT_FORM_ID].value.trim();
-    if (id) {
-      const editedBook = getBookById(id);
+  let isValid = true;
+  const book = Array.prototype.reduce.call(
+    editFormPage.elements, (total, { name, validity, value }) => {
+      if (name) {
+        isValid &= validity.valid;
+        total[name] = value.trim();
+      }
+      return total;
+    }, {});
+  const isValidBookData = isValid && book.name && book.author && book.plot && book.url.startsWith('http');
+  if (isValidBookData) {
+    if (book.id) {
+      const editedBook = getBookById(book.id);
       fillElement(editedBook, book);
       book.nameElement = editedBook.nameElement;
-      book.nameElement.textContent = name;
+      book.nameElement.textContent = editedBook.name;
       setTimeout(() => alert('Book successfully updated'), ALERT_TIMEOUT);
     } else {
       book.id = `${++maxId}`;
@@ -177,7 +191,7 @@ function saveBook() {
     }
     localStorage.setItem(APP_BOOKS_STORAGE_KEY, JSON.stringify(books));
     handleClick({ currentTarget: book.nameElement });
-  } else {
-    alert('All field required');
+    return;
   }
+  alert('All fields are required');
 }

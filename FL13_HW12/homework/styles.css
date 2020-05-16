@@ -113,3 +113,8 @@ label {
     height: calc(100% - 25px);
     overflow: auto;
 }
+
+input:invalid,
+textarea:invalid {
+    background-color: red;
+}

@@ -20,27 +20,28 @@
 </head>
 
 <body>
-    <header class="container-md">
-        <nav class="navbar navbar-expand-md navbar-light d-flex justify-content-between px-0">
-            <p class="h1">Games</p>
-            <button class="toggler navbar-toggler" type="button" data-toggle="collapse"
+    <header class="header container-md">
+        <nav class="header__navbar navbar navbar-expand-md navbar-light d-flex justify-content-between px-0">
+            <p class="navbar__logo h1">Games</p>
+            <button class="navbar__toggler toggler navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="toggler__icon navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto font-weight-bold">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home</a>
+            <div class="navbar__collapse collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+                <ul class="collapse__navbar-nav navbar-nav mr-auto font-weight-bold">
+                    <li class="navbar-nav__nav-item nav-item_active nav-item active">
+                        <a class="nav-item__nav-link nav-link" href="#">Home</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Features</a>
+                    <li class="navbar-nav__nav-item nav-item_active nav-item active">
+                        <a class="nav-item__nav-link nav-link" href="#">Features</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Pricing</a>
+                    <li class="navbar-nav__nav-item nav-item_active nav-item active">
+                        <a class="nav-item__nav-link nav-link" href="#">Pricing</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
+                    <li class="navbar-nav__nav-item nav-item">
+                        <a class="nav-item__nav-link nav-item__nav-link_disabled nav-link disabled"
+                            href="#">Disabled</a>
                     </li>
                 </ul>
             </div>
@@ -50,11 +51,11 @@
         </nav>
     </header>
 
-    <main>
+    <main class="main">
 
-        <section class="hero container-md pb-5">
-            <div class="row flex-md-row flex-column-reverse align-items-center">
-                <div class="col col-md-5">
+        <section class="main__hero hero container-md pb-5">
+            <div class="hero__row row flex-column-reverse flex-md-row align-items-center">
+                <div class="row__col col col-md-5">
                     <h1 class="hero__header">Front-end Lab CSS-Frameworks</h1>
                     <p class="hero__description h5 font-weight-normal">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -63,58 +64,58 @@
                     </p>
                     <button class="hero__button btn text-white" type="submit">Find Out More</button>
                 </div>
-                <div class="col col-md-7">
-                    <img src="assets/hero-5.jpg" alt="Hero image" class="img-fluid">
+                <div class="row__col col col-md-7">
+                    <img src="assets/hero-5.jpg" alt="Hero image" class="hero__image img-fluid">
                 </div>
             </div>
         </section>
 
-        <section class="game-section  py-5text-center bg-dark text-white">
-            <div class="game-section__section-header section-header pb-5 container-md">
+        <section class="main__game-section game-section game-section_dark py-5 text-center bg-dark text-white">
+            <div class="game-section__section-header section-header container-md pb-5">
                 <h2 class="section-header__header font-weight-normal">Games section</h2>
-                <p class="section-header__description">
+                <p class="section-header__description col-md-8 mx-auto">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aenean commodo ligula eget dolor.
                 </p>
             </div>
             <div class="game-section__list-container list-container container-md">
-                <div class="row">
-                    <div class="list-container__game-card game-card col-md-4 col-sm-6 pb-5">
+                <div class="list-container__row row">
+                    <div class="list-container__game-card game-card col-sm-6 col-md-4 pb-5">
                         <img class="game-card__image img-fluid rounded-top shadow" src="assets/1.jpg" alt="image 1">
                         <p class="game-card__title pt-3 font-weight-bold">Card title</p>
                         <p class="game-card__description">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aenean commodo ligula eget dolor.
                         </p>
                     </div>
-                    <div class="list-container__game-card game-card col-md-4 col-sm-6 pb-5">
-                        <img class="img-fluid rounded-top shadow" src="assets/2.jpg" alt="image 2">
+                    <div class="list-container__game-card game-card col-sm-6 col-md-4 pb-5">
+                        <img class="game-card__image img-fluid rounded-top shadow" src="assets/2.jpg" alt="image 2">
                         <p class="game-card__title pt-3 font-weight-bold">Card title</p>
                         <p class="game-card__description">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aenean commodo ligula eget dolor.
                         </p>
                     </div>
-                    <div class="list-container__game-card game-card col-md-4 col-sm-6 pb-5">
-                        <img class="img-fluid rounded-top shadow" src="assets/3.jpg" alt="image 3">
+                    <div class="list-container__game-card game-card col-sm-6 col-md-4 pb-5">
+                        <img class="game-card__image img-fluid rounded-top shadow" src="assets/3.jpg" alt="image 3">
                         <p class="game-card__title pt-3 font-weight-bold">Card title</p>
                         <p class="game-card__description">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aenean commodo ligula eget dolor.
                         </p>
                     </div>
-                    <div class="list-container__game-card game-card col-md-4 col-sm-6 pb-5">
-                        <img class="img-fluid rounded-top shadow" src="assets/4.jpg" alt="image 4">
+                    <div class="list-container__game-card game-card col-sm-6 col-md-4 pb-5">
+                        <img class="game-card__image img-fluid rounded-top shadow" src="assets/4.jpg" alt="image 4">
                         <p class="game-card__title pt-3 font-weight-bold">Card title</p>
                         <p class="game-card__description">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aenean commodo ligula eget dolor.
                         </p>
                     </div>
-                    <div class="list-container__game-card game-card col-md-4 col-sm-6 pb-5">
-                        <img class="img-fluid rounded-top shadow" src="assets/5.jpg" alt="image 5">
+                    <div class="list-container__game-card game-card col-sm-6 col-md-4 pb-5">
+                        <img class="game-card__image img-fluid rounded-top shadow" src="assets/5.jpg" alt="image 5">
                         <p class="game-card__title pt-3 font-weight-bold">Card title</p>
                         <p class="game-card__description">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aenean commodo ligula eget dolor.
                         </p>
                     </div>
-                    <div class="list-container__game-card game-card col-md-4 col-sm-6 pb-5">
-                        <img class="img-fluid rounded-top shadow" src="assets/6.jpg" alt="image 6">
+                    <div class="list-container__game-card game-card col-sm-6 col-md-4 pb-5">
+                        <img class="game-card__image img-fluid rounded-top shadow" src="assets/6.jpg" alt="image 6">
                         <p class="game-card__title pt-3 font-weight-bold">Card title</p>
                         <p class="game-card__description">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aenean commodo ligula eget dolor.
@@ -124,19 +125,21 @@
             </div>
         </section>
 
-        <section class="game-section text-center py-5">
-            <div class="game-section__section-header section-header pb-5 container-md">
+        <section class="main__game-section game-section game-section_light py-5 text-center">
+            <div class="game-section__section-header section-header container-md pb-5">
                 <h2 class="section-header__header font-weight-normal">Games section</h2>
                 <p class="section-header__description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aenean commodo ligula eget dolor.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 </p>
             </div>
             <div class="game-section__list-container list-container container-md">
-                <div class="row">
+                <div class="list-container__row row">
                     <div class="list-container__game-card game-card col-md-6 pb-5">
                         <img class="game-card__image img-fluid rounded-top shadow" src="assets/7.jpg" alt="image 7">
                         <p class="game-card__title pt-3 font-weight-bold">Card title</p>
-                        <p class="game-card__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p class="game-card__description">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aenean commodo ligula eget dolor.
+                        </p>
                     </div>
                     <div class="list-container__game-card game-card col-md-6 pb-5">
                         <img class="game-card__image img-fluid rounded-top shadow" src="assets/8.jpg" alt="image 8">
@@ -179,16 +182,16 @@
 
     </main>
 
-    <footer class="bg-dark text-white">
-        <div class="footer container-md">
-            <div class="row py-5">
-                <div class="col-md-6">
-                    <p class="footer_head mb-2 h5 font-weight-normal">Subscribe</p>
-                    <p class="footer_description mb-md-0 mb-2">
+    <footer class="footer bg-dark text-white">
+        <div class="footer__container container-md">
+            <div class="container__row row py-5">
+                <div class="row__col col-md-6">
+                    <p class="footer__head mb-2 h5 font-weight-normal">Subscribe</p>
+                    <p class="footer__description mb-md-0 mb-2">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aenean commodo ligula eget dolor.
                     </p>
                 </div>
-                <form class="footer__form form col-md-6 d-flex flex-column justify-content-between">
+                <form class="footer__form form d-flex flex-column col-md-6 justify-content-between">
                     <input class="form__email mb-2 form-control" type="email" placeholder="Email Address">
                     <input class="form__submit-button btn text-white" type="submit" value="Subscribe">
                 </form>

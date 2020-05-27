@@ -1,1 +1,12 @@
-/* Your code goes here */
+body {
+    margin: 0;
+}
+
+#app-container {
+    width: 100vw;
+    padding: 10px;
+}
+
+#error-message {
+    color: red;
+}

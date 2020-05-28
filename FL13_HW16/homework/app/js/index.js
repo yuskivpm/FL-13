@@ -11,7 +11,6 @@ const CREATE_USER_INPUTS = [
 const VALIDATION_FAILED = { message: 'All fields are required' };
 
 const headers = { 'Content-type': 'application/json; charset=UTF-8' };
-
 const GET_USERS = { method: 'GET', uri: '/users', code: 200 };
 const CREATE_USER = { method: 'POST', uri: '/users', code: 201, headers };
 const UPDATE_USER = { method: 'PUT', uri: '/users/', code: 204, headers };
@@ -142,17 +141,19 @@ const getAllUsers = spinnerStatus =>
 
 const getCurUserButtons = ({ node }) => node.querySelectorAll('input[type=button]') || [];
 
-const setDisableStatus = (buttons, status) => buttons.forEach(button => {
-  button.disabled = status;
-});
+const setDisableStatus = (buttons, status) =>
+  buttons.forEach(button => {
+    button.disabled = status;
+  });
 
-const loadFormData = form => Array.prototype.reduce.call(
-  form.querySelectorAll('input[type=text]'),
-  (acc, { name, value }) => {
-    acc[name] = value.trim();
-    return acc;
-  }, {}
-);
+const loadFormData = form =>
+  Array.prototype.reduce.call(
+    form.querySelectorAll('input[type=text]'),
+    (acc, { name, value }) => {
+      acc[name] = value.trim();
+      return acc;
+    }, {}
+  );
 
 const isValidUser = ({ name, username }) =>
   name && username ? true : defaultErrorHandler(VALIDATION_FAILED);

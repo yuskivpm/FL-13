@@ -92,7 +92,7 @@ function parseJson(json) {
 }
 
 function defaultErrorHandler({ status, statusText, responseText, message = 'Status: Online' } = {}) {
-  if (status) {
+  if (status >= 0) {
     errorMessageElement.textContent = `Error: response code: ${status}, status text: ${statusText}, ` +
       `response text: ${responseText}`;
     errorMessageElement.className = 'error-text';
@@ -223,7 +223,7 @@ function newUser(event) {
     sendUserToServer(
       'create',
       CREATE_USER,
-      () => null,
+      undefined,
       () => {
         newUserForm['name'].value = '';
         newUserForm['username'].value = '';

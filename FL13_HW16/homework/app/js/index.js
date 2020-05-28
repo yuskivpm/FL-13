@@ -8,36 +8,20 @@ const CREATE_USER_INPUTS = [
   { type: 'submit', name: 'submit', value: 'Add New User' }
 ];
 
-const GET_USERS = {
-  method: 'GET',
-  uri: '/users',
-  code: 200
-};
-const CREATE_USER = {
-  method: 'POST',
-  uri: '/users',
-  headers: { 'Content-type': 'application/json; charset=UTF-8' },
-  code: 201
-};
-const UPDATE_USER = {
-  method: 'PUT',
-  uri: '/users/',
-  headers: { 'Content-type': 'application/json; charset=UTF-8' },
-  code: 204
-};
-const DELETE_USER = {
-  method: 'DELETE',
-  uri: '/users/',
-  headers: { 'Authorization': 'admin' },
-  code: 204
-};
+const VALIDATION_FAILED = { message: 'All fields are required' };
 
-const REFRESH_SPINNER_STATUS = 'Refresh';
-const EMPTY_MESSAGE = 'Online';
+const headers = { 'Content-type': 'application/json; charset=UTF-8' };
+
+const GET_USERS = { method: 'GET', uri: '/users', code: 200 };
+const CREATE_USER = { method: 'POST', uri: '/users', code: 201, headers };
+const UPDATE_USER = { method: 'PUT', uri: '/users/', code: 204, headers };
+const DELETE_USER = { method: 'DELETE', uri: '/users/', code: 204, headers: { 'Authorization': 'admin' } };
 
 const appContainer = document.getElementById('app-container');
+
 let newUserForm;
 let errorMessageElement;
+let spinnerElement;
 let usersTableBody;
 let cachedDb = [];
 
@@ -57,7 +41,7 @@ const createElementWithText = (nodeType, textValue, parent, options, events) =>
 
 const createInputCellElement = (name, value, type = 'text', events) =>
   createElementShort('td',
-    createElement('input', { type, name, value }, undefined, events)
+    createElement('input', { type, name, value, required: 'required' }, undefined, events)
   );
 
 const createRow = ({ id, name, username }) =>
@@ -74,20 +58,23 @@ function renderPage() {
   newUserForm = createElement('form', { id: 'add-user' }, appContainer, [['submit', newUser]],
     ...CREATE_USER_INPUTS.map(options => createElement('input', options))
   );
-  errorMessageElement = createElement('h2', { id: 'error-message' }, appContainer);
+  createElement('div', { className: 'spinner-wrapper' }, appContainer, [],
+    spinnerElement = createElementWithText('div', 'Loading...', undefined, { className: 'spinner' }),
+    errorMessageElement = createElement('h2', { id: 'error-message' })
+  );
   createElementWithText('h2', 'Users', appContainer);
-  usersTableBody = createElement('tbody', {},
-    createElement('table', { id: 'users' }, appContainer, [],
-      createElementShort('thead',
-        createElementShort('tr',
-          ...TABLE_HEADER_NAMES.map(name => createElementWithText('th', name))
-        )
+  createElement('table', { id: 'users' }, appContainer, [],
+    createElementShort('thead',
+      createElementShort('tr',
+        ...TABLE_HEADER_NAMES.map(name => createElementWithText('th', name))
       )
-    )
+    ),
+    usersTableBody = createElement('tbody', {})
   );
 }
 
-function setSpinnerStatus(message = EMPTY_MESSAGE) {
+function setSpinnerStatus(message) {
+  spinnerElement.style.display = message ? 'inline-block' : 'none';
   defaultErrorHandler({ message });
 }
 
@@ -104,21 +91,25 @@ function parseJson(json) {
   }
 }
 
-function defaultErrorHandler({ status, statusText, responseText, message = 'Online' } = {}) {
-  errorMessageElement.textContent = status
-    ? `Error: response code: ${status}, status text: ${statusText}, ` +
-    `response text: ${responseText}`
-    : message;
+function defaultErrorHandler({ status, statusText, responseText, message = 'Status: Online' } = {}) {
+  if (status) {
+    errorMessageElement.textContent = `Error: response code: ${status}, status text: ${statusText}, ` +
+      `response text: ${responseText}`;
+    errorMessageElement.className = 'error-text';
+  } else {
+    errorMessageElement.textContent = message;
+    errorMessageElement.className = 'status-text';
+  }
 }
 
 const fetchData = (
   spinnerStatus,
   { uri, method, headers = {}, code },
   { body, id = '' } = {}
-) => new Promise(function (resolve, reject) {
+) => new Promise((resolve, reject) => {
   setSpinnerStatus(spinnerStatus);
   const httpRequest = new XMLHttpRequest();
-  httpRequest.onreadystatechange = function () {
+  httpRequest.onreadystatechange = () => {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       setSpinnerStatus();
       if (httpRequest.status === code) {
@@ -134,14 +125,14 @@ const fetchData = (
   httpRequest.send(body);
 });
 
-const fetchAllUsers = (spinnerStatus = REFRESH_SPINNER_STATUS) =>
+const fetchAllUsers = (spinnerStatus = 'Refresh') =>
   fetchData(spinnerStatus, GET_USERS)
     .then(data => parseJson(data) || [])
     .catch(defaultErrorHandler);
 
-const getAllUsers = (spinnerStatus = REFRESH_SPINNER_STATUS) =>
+const getAllUsers = spinnerStatus =>
   fetchAllUsers(spinnerStatus)
-    .then(users => {
+    .then((users = []) => {
       usersTableBody.innerHTML = '';
       cachedDb = users.map(user => {
         user.node = createRow(user);
@@ -149,87 +140,98 @@ const getAllUsers = (spinnerStatus = REFRESH_SPINNER_STATUS) =>
       });
     });
 
-function getCurUserButtons(index) {
-  return index >= 0 ? cachedDb[index].node.querySelectorAll('input[type=button]') : [];
-}
+const getCurUserButtons = ({ node }) => node.querySelectorAll('input[type=button]') || [];
 
-const setDisableStatus = (buttons, status) =>
-  buttons.forEach(button => {
-    button.disabled = status;
-  });
+const setDisableStatus = (buttons, status) => buttons.forEach(button => {
+  button.disabled = status;
+});
+
+const loadFormData = form => Array.prototype.reduce.call(
+  form.querySelectorAll('input[type=text]'),
+  (acc, { name, value }) => {
+    acc[name] = value.trim();
+    return acc;
+  }, {}
+);
+
+const isValidUser = ({ name, username }) =>
+  name && username ? true : defaultErrorHandler(VALIDATION_FAILED);
+
+const sendUserToServer = (saveType, requestType, startPhase, finallyPhase, body, id) =>
+  fetchData(`Attempt to ${saveType} user's record`, requestType, { id, body: JSON.stringify(body) })
+    .then(startPhase)
+    .then(() => fetchAllUsers())
+    .then(compareChanges)
+    .catch(defaultErrorHandler)
+    .finally(finallyPhase);
+
+const getUserById = id => cachedDb.find(({ id: curId }) => curId === id);
 
 function deleteUser(event) {
   const id = getId(event);
-  const selectedUserIndex = cachedDb.findIndex(({ id: curId }) => curId === id);
-  let buttons = getCurUserButtons(selectedUserIndex);
-  setDisableStatus(buttons, true);
-  fetchData('Attempt to delete user\'s record', DELETE_USER, { id })
-    .then(() => {
-      if (selectedUserIndex >= 0) {
-        cachedDb[selectedUserIndex].node.remove();
+  const selectedUser = getUserById(id);
+  if (selectedUser) {
+    let buttons = getCurUserButtons(selectedUser);
+    setDisableStatus(buttons, true);
+    sendUserToServer(
+      'delete',
+      DELETE_USER,
+      () => {
+        selectedUser.node.remove();
         buttons = [];
-        cachedDb.splice(selectedUserIndex, 1);
-      }
-      return fetchAllUsers();
-    })
-    .then(compareChanges)
-    .catch(defaultErrorHandler)
-    .finally(() => {
-      setDisableStatus(buttons, false);
-    });
+        const selectedUserIndex = cachedDb.indexOf(selectedUser);
+        if (selectedUserIndex >= 0) {
+          cachedDb.splice(selectedUserIndex, 1);
+        }
+      },
+      () => setDisableStatus(buttons, false),
+      undefined,
+      id
+    );
+  }
 }
 
 function updateUser(event) {
-  const inputs = event.target.parentElement.parentElement.querySelectorAll('input[type=text]');
-  const body = Array.prototype.reduce.call(inputs, (acc, { name, value }) => {
-    acc[name] = value.trim();
-    return acc;
-  }, {});
-  if (!body.name || !body.username) {
-    defaultErrorHandler({ message: 'All fields are required' });
-    return;
+  const body = loadFormData(event.target.parentElement.parentElement);
+  if (isValidUser(body)) {
+    const id = getId(event);
+    const selectedUser = getUserById(id);
+    if (!selectedUser || body.name === selectedUser.name && body.username === selectedUser.username) {
+      return defaultErrorHandler({ message: 'Nothing to save' });
+    }
+    const buttons = getCurUserButtons(selectedUser);
+    setDisableStatus(buttons, true);
+    sendUserToServer(
+      'update',
+      UPDATE_USER,
+      () => {
+        selectedUser.name = body.name;
+        selectedUser.username = body.username;
+      },
+      () => setDisableStatus(buttons, false),
+      body,
+      id
+    );
   }
-  const id = getId(event);
-  const selectedUserIndex = cachedDb.findIndex(({ id: curId }) => curId === id);
-  const { name, username } = selectedUserIndex >= 0 ? cachedDb[selectedUserIndex] : {};
-  if (body.name === name && body.username === username) {
-    defaultErrorHandler({ message: 'Nothing to save' });
-    return;
-  }
-  const buttons = getCurUserButtons(selectedUserIndex);
-  setDisableStatus(buttons, true);
-  fetchData('Attempt to update user\'s record', UPDATE_USER, { id, body: JSON.stringify(body) })
-    .then(() => {
-      if (selectedUserIndex >= 0) {
-        cachedDb[selectedUserIndex].name = body.name;
-        cachedDb[selectedUserIndex].username = body.username;
-      }
-      return fetchAllUsers();
-    })
-    .then(compareChanges)
-    .catch(defaultErrorHandler)
-    .finally(() => {
-      setDisableStatus(buttons, false);
-    });
 }
 
 function newUser(event) {
   event.preventDefault();
-  const body = { name: newUserForm['name'].value.trim(), username: newUserForm['username'].value.trim() };
-  if (!body.name || !body.username) {
-    defaultErrorHandler({ message: 'All fields required' });
-    return;
+  const body = loadFormData(newUserForm);
+  if (isValidUser(body)) {
+    newUserForm['submit'].disabled = true;
+    sendUserToServer(
+      'create',
+      CREATE_USER,
+      () => null,
+      () => {
+        newUserForm['name'].value = '';
+        newUserForm['username'].value = '';
+        newUserForm['submit'].disabled = false;
+      },
+      body
+    );
   }
-  newUserForm['submit'].disabled = true;
-  newUserForm['name'].value = '';
-  newUserForm['username'].value = '';
-  fetchData('Attempt to create user\'s record', CREATE_USER, { body: JSON.stringify(body) })
-    .then(() => fetchAllUsers())
-    .then(compareChanges)
-    .catch(defaultErrorHandler)
-    .finally(() => {
-      newUserForm['submit'].disabled = false;
-    });
 }
 
 function updateField(user, fieldName, newValue) {
@@ -240,19 +242,20 @@ function updateField(user, fieldName, newValue) {
 }
 
 function compareChanges(newUsersDb) {
-  cachedDb = cachedDb.map(user => {
-    const newUser = newUsersDb.find(aUser => aUser.id === user.id);
-    if (newUser) {
-      updateField(user, 'name', newUser.name);
-      updateField(user, 'username', newUser.username);
-      newUser.id = '';
-    } else {
-      user.node.remove();
-      user.id = '';
-    }
-    return user;
-  })
-    .filter(user => user.id);
+  cachedDb = cachedDb
+    .map(user => {
+      const newUser = newUsersDb.find(({ id }) => id === user.id);
+      if (newUser) {
+        updateField(user, 'name', newUser.name);
+        updateField(user, 'username', newUser.username);
+        newUser.id = '';
+      } else {
+        user.node.remove();
+        user.id = '';
+      }
+      return user;
+    })
+    .filter(({ id }) => id);
   newUsersDb.forEach(aUser => {
     if (aUser.id) {
       aUser.node = createRow(aUser);

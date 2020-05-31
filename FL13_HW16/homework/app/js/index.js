@@ -36,7 +36,7 @@ const createElement = (nodeType, options = {}, parent, events = [], ...children)
 const createElementShort = (nodeType, ...children) => createElement(nodeType, {}, null, [], ...children);
 
 const createElementWithText = (nodeType, textValue, parent, options, events) =>
-  createElement(nodeType, options, parent, events, document.createTextNode(textValue));
+  createElement(nodeType, options, parent, events, textValue);
 
 const createInputCellElement = (name, value, type = 'text', events) =>
   createElementShort('td',

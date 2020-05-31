@@ -29,7 +29,7 @@ const getId = ({ target: { parentElement: { parentElement: { id } } } }) => id;
 const createElement = (nodeType, options = {}, parent, events = [], ...children) => {
   const element = Object.assign(document.createElement(nodeType), options);
   events.forEach(([eventName, handler]) => element.addEventListener(eventName, handler));
-  children.forEach(child => element.appendChild(child));
+  element.append(...children);
   return parent ? parent.appendChild(element) : element;
 };
 

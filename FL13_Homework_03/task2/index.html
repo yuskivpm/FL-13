@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task #2</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <div class="mbox">
+        <h2>Add Todo</h2>
+        <form>
+            <label for="add-input">New task:</label>
+            <input type="text" id="add-input" />
+            <button id="add-submit">Add</button>
+            <label for="search-input">Filter: by "text"</label>
+            <input type="text" id="search-input" />
+            <div id="done-input" class="done-undefined">by "done"</div>
+        </form>
+
+        <hr>
+
+        <h2>Todo List</h2>
+        <ul id="list"></ul>
+
+        <hr>
+        <div class="amount">
+            <p>
+                Done: <span id="done">0</span>;
+                <br>
+                In progress: <span id="in-progress">0</span>;
+                <br>
+                <b>Total: <span id="total">0</span></b>
+            </p>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

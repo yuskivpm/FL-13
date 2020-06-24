@@ -1,0 +1,21 @@
+.mbox {
+  max-width: 900px;
+  margin:0 auto;
+}
+
+.row {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+.column {
+  width: 30%;
+  flex-basis: 30%;
+}
+
+img {
+  display: none;
+  width: 300px;
+}

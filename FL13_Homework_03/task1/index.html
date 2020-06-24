@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Task #1</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="mbox">
+    <header id="header">
+      <h1 id="title">Page</h1>
+    </header>
+
+    <div class="row">
+      <div class="column">
+        <h2>List title</h2>
+        <ul class="list" id="list-1">
+          <li>List <em>item</em> 1</li>
+          <li>List item 2</li>
+          <li><!-- empty --></li>
+          <li>List item 3</li>
+          <li>List item 4</li>
+          <li>List item 5</li>
+          <li><!-- empty --></li>
+          <li style="display:none">List item 6</li>
+          <li style="display:none" class="cloned">List item 6</li>
+          <li>List item 7</li>
+          <li>List item 8</li>
+          <li>List item 9</li>
+          <li>List item 10</li>
+          <li style="display:none" class="cloned">List item 10</li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <h2>List title</h2>
+        <ul class="list">
+          <li>List item 1</li>
+          <li>List item 2
+            <ul>
+              <li>List subitem 1</li>
+              <li>List subitem 2</li>
+              <li>List subitem 3</li>
+            </ul>
+          </li>
+          <li>List item 3</li>
+          <li>Buratino</li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <h2>List title</h2>
+        <ul class="list" id="list-3">
+          <li>List item 1</li>
+          <li>List <em>item</em> 2</li>
+          <li>List item 3</li>
+          <li>List item 4</li>
+          <li>List item 5</li>
+          <li>List item 6</li>
+          <li>List item 7</li>
+          <li>List item 8</li>
+          <li>List item 9</li>
+          <li>List item 10</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mbox">
+    <p>Lorem ipsum <b>dolor</b> sit amet, consectetur elit. <em>Cupiditate</em>, <b>numquam</b>!</p>
+    <p>Lorem ipsum <b>dolor</b> sit amet, consectetur <b>adipisicing</b> elit. Cupiditate, numquam!</p>
+    <p>Lorem ipsum <b>Casio</b> sit amet, consectetur adipisicing elit. Cupiditate, numquam!</p>
+  </div>
+
+  <div class="mbox">
+    <br>
+    <h3>Inputs are here:</h3>
+    <div>
+      <label>userage:</label>
+      <input type="text" name="userage" value="">
+    </div>
+    <br>
+    <div>
+      <label>myage:</label>
+      <input type="text" name="myage" value="">
+    </div>
+    <br>
+    <div>
+      <label>agenda:</label>
+      <input type="text" name="agenda" value="">
+    </div>
+    <br>
+    <br>
+    <input type="checkbox" name="checked_checkbox" value="Polo" checked> Polo <br>
+    <input type="checkbox" name="checked_checkbox" value="Golf"> Golf
+  </div>
+
+  <div class="mbox">
+    <img src="img/cat-1.jpg" alt="cat1">
+    <img src="img/dog.jpg" alt="Here is some doggo from google search">
+    <img src="img/cat-2.jpg" alt="my cat Lucky">
+  </div>
+
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>

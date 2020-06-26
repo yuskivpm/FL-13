@@ -34,10 +34,6 @@
   height: 21px;
 }
 
-#done-input {
-  display: inline-block;
-}
-
 .done-false:after {
   content: ' \2610';
   color: red;

@@ -1,0 +1,15 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true
+    },
+    "extends": [
+        "plugin:prettier/recommended"
+    ],
+    "rules": {
+        "prettier/prettier": ["error", {
+            "endOfLine":"auto"
+          }],
+        "strict": 0
+    }
+}

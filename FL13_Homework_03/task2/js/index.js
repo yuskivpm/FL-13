@@ -64,13 +64,18 @@ $.fn.todolist = function (defaultTaskList = []) {
 
   const generateItem = item => {
     const { text, done } = item;
-    const li = $('<li class="item"></li>');
-    const span = $(`<span class="item-text ${done ? DONE_CLASS : ''}">${text}</span>`)
+    const li = $('<li>')
+      .addClass('item');
+    const span = $('<span>')
+      .addClass(`item-text ${done ? DONE_CLASS : ''}`)
+      .text(text)
       .click(() => {
         span.toggleClass(DONE_CLASS);
         updateTotals(!decrementItemsCount(item));
       });
-    const button = $(`<button class="item-remove">Remove</button>`)
+    const button = $('<button>')
+      .addClass('item-remove')
+      .text('Remove')
       .click(() => {
         decrementItemsCount(item);
         todos.splice(todos.indexOf(item), 1);

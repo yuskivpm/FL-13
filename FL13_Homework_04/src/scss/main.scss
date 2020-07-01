@@ -32,6 +32,13 @@ h2 {
   justify-content: center;
 }
 
+.game-button {
+  padding: 10px;
+  margin: 5px;
+  background-color: lightskyblue;
+  border-radius: 5px;
+}
+
 .game-logger {
   display: flex;
   flex-direction: column;
@@ -39,4 +46,9 @@ h2 {
   p {
     margin: 0;
   }
+}
+
+.rules-img {
+  width: 500px;
+  height: 500px;
 }

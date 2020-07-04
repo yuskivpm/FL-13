@@ -1,0 +1,53 @@
+.todo-list {
+  position: relative;
+  width: 100%;
+  padding: 0;
+}
+
+.todo-item {
+  list-style: none;
+  background-color: #fff;
+  border: 2px solid #f0f0f0;
+  height: 70px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.item-duration,
+.item-startDate {
+  flex-basis: 90px;
+  text-align: center;
+}
+
+.item-title,
+.item-authors {
+  flex-basis: 150px;
+}
+
+.item-title {
+  font-weight: bold;
+}
+.item-button-wrapper {
+  flex-basis: 70px;
+  text-align: center;
+  letter-spacing: 5px;
+  font-weight: bold;
+}
+
+.item-description {
+  flex: 1;
+}
+
+.item-button:focus,
+.item-button:hover {
+  border: 2px solid royalblue;
+  padding: 5px;
+  border-radius: 7px;
+  outline: none;
+}
+
+.item-cell {
+  padding: 0 10px;
+}

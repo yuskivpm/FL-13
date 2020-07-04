@@ -1,0 +1,36 @@
+.editor-page {
+  width: 500px;
+  margin: 10px auto;
+  background-color: #fff;
+  padding: 30px 50px;
+  border-radius: 10px;
+}
+
+.editor-header {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.row div {
+  width: 45%;
+}
+
+.editor-input {
+  height: 2.5em;
+}
+
+.editor-textarea {
+  height: 100px;
+}
+
+.editor-input,
+.editor-textarea {
+  border: 1px solid grey;
+  margin: 10px 0;
+  width: 100%;
+}

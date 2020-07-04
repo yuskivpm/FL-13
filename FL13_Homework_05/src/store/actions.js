@@ -1,14 +1,23 @@
 import * as types from './actionTypes';
+import { createAction } from './toolkit';
 import { EDIT_PAGE } from '../utils/constants';
 
-// const createAction = type => {
-//   return function (...args) {
-//     return {
-//       type,
-//       payload: !args.length ? undefined : args.length === 1 ? args[0] : args,
-//     };
-//   }
-// }
+//* simplification with custom createAction
+
+export const openEditor = createAction(
+  types.OPEN_EDITOR,
+  editItem => ({ activePage: EDIT_PAGE, editItem })
+);
+
+export const filterChange = createAction(types.FILTER_CHANGE);
+
+export const deleteItemById = createAction(types.DELETE_ITEM_BY_ID);
+
+export const openMainPage = createAction(types.GOTO_MAIN_PAGE);
+
+export const saveItem = createAction(types.SAVE_ITEM);
+
+/* For the old school way:
 
 export const openEditor = editItem => ({
   type: types.OPEN_EDITOR,
@@ -33,3 +42,5 @@ export const saveItem = item => ({
   type: types.SAVE_ITEM,
   payload: item,
 });
+
+*/

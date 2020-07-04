@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import TodoList from '../containers/ConnectedTodoList';
 import SearchInput from './SearchInput';
 import './MainPage.css';
 
-const MainPage = (props) => {
-  const { filter, onAddCourse, onFilterChange } = props;
-  const handleInputChange = (event) => onFilterChange(event.target.value);
+const MainPage = ({ filter, onAddCourse, onFilterChange }) => {
+  const handleInputChange = useCallback(({ target: { value } }) => onFilterChange(value), [
+    onFilterChange,
+  ]);
   return (
     <div className="main-page">
       <div className="main-page-header">

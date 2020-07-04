@@ -1,7 +1,9 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import TodoItem from './TodoItem';
 import PopupMenu from './PopupMenu';
 import './TodoList.css';
+
+const POPUP_MENU_EVENTS = ['click', 'keydown'];
 
 const getFilteredIndexes = (rows, filterText) => {
   if (!filterText) {
@@ -16,16 +18,24 @@ const getFilteredIndexes = (rows, filterText) => {
   }, []);
 };
 
-const TodoList = (props) => {
+const TodoList = ({ rows = [], filter, todoItemDataOrder, onEditItem, onDeleteItem }) => {
   const [activeItemId, setActiveItem] = useState(null);
+
   useEffect(() => {
     if (activeItemId) {
-      window.addEventListener('click', setActiveItem);
-      return () => window.removeEventListener('click', setActiveItem);
+      POPUP_MENU_EVENTS.forEach((name) => window.addEventListener(name, setActiveItem));
+      return () =>
+        POPUP_MENU_EVENTS.forEach((name) => window.removeEventListener(name, setActiveItem));
     }
-  }, [activeItemId]);
+  }, [activeItemId, setActiveItem]);
 
-  const { rows = [], filter, todoItemDataOrder, onEditItem, onDeleteItem } = props;
+  const handleOpenPopupMenu = useCallback(
+    (event, id) => {
+      event.stopPropagation();
+      setActiveItem(id);
+    },
+    [setActiveItem]
+  );
 
   const filteredIndexes = useMemo(() => getFilteredIndexes(rows, filter), [rows, filter]);
   if (!filteredIndexes.length) {
@@ -36,11 +46,6 @@ const TodoList = (props) => {
     { caption: 'Edit', handler: () => onEditItem(activeItemId) },
     { caption: 'Delete', handler: () => onDeleteItem(activeItemId) },
   ];
-
-  const handleOpenPopupMenu = (event, id) => {
-    event.stopPropagation();
-    setActiveItem(id);
-  };
 
   return (
     <ul className="todo-list">

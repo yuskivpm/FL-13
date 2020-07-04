@@ -1,9 +1,9 @@
 .editor-page {
   width: 500px;
   margin: 10px auto;
-  background-color: #fff;
   padding: 30px 50px;
   border-radius: 10px;
+  background-color: #fff;
 }
 
 .editor-header {
@@ -12,8 +12,8 @@
 
 .row {
   display: flex;
-  justify-content: space-between;
   padding: 20px 0;
+  justify-content: space-between;
 }
 
 .row div {
@@ -30,7 +30,7 @@
 
 .editor-input,
 .editor-textarea {
-  border: 1px solid grey;
-  margin: 10px 0;
   width: 100%;
+  margin: 10px 0;
+  border: 1px solid grey;
 }

@@ -5,18 +5,18 @@
 }
 
 .todo-item {
+  display: flex;
+  position: relative;
+  height: 70px;
+  border: 2px solid #f0f0f0;
+  border-radius: 15px;
+  align-items: center;
   list-style: none;
   background-color: #fff;
-  border: 2px solid #f0f0f0;
-  height: 70px;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  position: relative;
 }
 
 .item-duration,
-.item-startDate {
+.item-date {
   flex-basis: 90px;
   text-align: center;
 }
@@ -32,8 +32,8 @@
 .item-button-wrapper {
   flex-basis: 70px;
   text-align: center;
-  letter-spacing: 5px;
   font-weight: bold;
+  letter-spacing: 5px;
 }
 
 .item-description {
@@ -42,8 +42,8 @@
 
 .item-button:focus,
 .item-button:hover {
-  border: 2px solid royalblue;
   padding: 5px;
+  border: 2px solid royalblue;
   border-radius: 7px;
   outline: none;
 }

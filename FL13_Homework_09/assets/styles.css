@@ -1,0 +1,50 @@
+.resource-manager {
+  color: blue;
+}
+
+.resource-manager::before {
+  content: 'RM: ';
+  color: green;
+}
+
+.developer {
+  color: black;
+}
+
+.developer::before {
+  content: 'DEV: ';
+  color: blue;
+}
+
+.pool {
+  color: aqua;
+}
+
+.average-salary {
+  color: blue;
+}
+
+body {
+  margin: 0;
+}
+
+/* li {
+  list-style: none;
+} */
+
+#root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100vw;
+  height: 100vh;
+}
+
+.tab {
+  width: 49%;
+  height: 49%;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  border: 1px solid black;
+}

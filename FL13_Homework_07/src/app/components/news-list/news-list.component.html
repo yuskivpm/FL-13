@@ -1,0 +1,21 @@
+<div>
+  <!-- <form [formGroup]="headerForm"> -->
+  <h2>{{currentSource ? currentSource.name : 'Select source from list'}}</h2>
+  <select [(ngModel)]="sourceId" (change)="getSourceName()">
+    <!-- <select [formControlName]="sourceId"> -->
+    <option *ngFor="let source of sourcesList" [value]="source.id" [selected]="source.id === sourceId">
+      {{source.name}}
+    </option>
+  </select>
+  <label>
+    Filter:
+    <!-- <input value="{{filter}}" placeholder="Filter keyword"> -->
+  </label>
+  <button>Filter</button>
+  <a *ngIf="sourceId > 0" routerLink="/add/{{sourceId}}">Add Article</a>
+  <!-- </form> -->
+</div>
+
+<ul class="news-list">
+  <app-short-news *ngFor="let news of newsList" [newsItem]="news"></app-short-news>
+</ul>

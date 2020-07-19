@@ -1,0 +1,26 @@
+.short-news {
+  display: flex;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid black;
+  box-shadow: 2px 2px 2px grey;
+  margin: 5px;
+}
+
+.short-news-image {
+  height: calc(100% - 10px);
+  padding: 5px;
+}
+
+.short-news-text {
+  width: 100%;
+}
+
+.short-news-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+p {
+  margin: 0;
+}

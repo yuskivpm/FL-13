@@ -1,0 +1,12 @@
+<h2>New full view</h2>
+<div *ngIf="newsDetail">
+  <p>id: {{newsDetail.id}}</p>
+  <p>sourceId: {{newsDetail.sourceId}}</p>
+  <img src="{{newsDetail.imageUrl}}" alt="news image" class="news-image">
+  <h2>heading: {{newsDetail.heading}}</h2>
+  <p>description: {{newsDetail.description}}</p>
+  <p>content: {{newsDetail.content}}</p>
+  <p>date: {{newsDetail.date}}</p>
+  <p>author: {{newsDetail.author}}</p>
+</div>
+<!-- <a routerLink="/list/{{sourceId}}">Back</a> -->

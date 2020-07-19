@@ -1,0 +1,53 @@
+<h2>Create news</h2>
+<form *ngIf="news">
+  <label>
+    id:
+    <br>
+    <input [(ngModel)]="news.id" placeholder="id">
+  </label>
+  <br>
+  <label>
+    sourceId:
+    <br>
+    <input [(ngModel)]="news.sourceId" placeholder="sourceId">
+  </label>
+  <br>
+  <label>
+    imageUrl:
+    <br>
+    <input [(ngModel)]="news.imageUrl" placeholder="imageUrl">
+  </label>
+  <br>
+  <label>
+    heading:
+    <br>
+    <input [(ngModel)]="news.heading" placeholder="heading">
+  </label>
+  <br>
+  <label>
+    description:
+    <br>
+    <input [(ngModel)]="news.description" placeholder="description">
+  </label>
+  <br>
+  <label>
+    content:
+    <br>
+    <textarea [(ngModel)]="news.content"></textarea>
+  </label>
+  <br>
+  <label>
+    date:
+    <br>
+    <input [(ngModel)]="news.date" type="date" placeholder="date">
+  </label>
+  <br>
+  <label>
+    author:
+    <br>
+    <input [(ngModel)]="news.author" placeholder="author">
+  </label>
+  <br>
+  <button (click)="onSave()">Save</button>
+  <a routerLink="/list/{{news.sourceId}}">Cancel</a>
+</form>

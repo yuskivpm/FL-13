@@ -11,8 +11,6 @@ import {
   NEWS_LIST_BASE_URL,
 } from '../../constants/common';
 
-const EMPTY_SOURCE: NewsSource = { id: 0, name: '' };
-
 @Component({
   selector: 'app-news-list',
   templateUrl: './news-list.component.html',
@@ -33,7 +31,7 @@ export class NewsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSources();
-    const sourceId = +this.route.snapshot.paramMap.get(PARAM_SOURCE_ID);
+    const sourceId = +(this.route.snapshot.paramMap.get(PARAM_SOURCE_ID) || 0);
     this.selectSourceId.setValue(sourceId);
     this.initData(sourceId);
     this.selectSourceId.valueChanges.subscribe((newSourceId) => {

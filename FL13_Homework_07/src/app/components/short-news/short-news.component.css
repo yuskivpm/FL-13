@@ -1,6 +1,6 @@
 .short-news {
   display: flex;
-  height: 100px;
+  min-height: 100px;
   padding: 5px;
   border: 1px solid black;
   box-shadow: 2px 2px 2px grey;
@@ -8,12 +8,15 @@
 }
 
 .short-news-image {
-  height: calc(100% - 10px);
+  height: 100px;
   padding: 5px;
 }
 
 .short-news-text {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex: 1;
 }
 
 .short-news-header {
@@ -31,4 +34,13 @@ p {
 
 .short-news-link {
   font-weight: bold;
+  padding: 5px;
+  background-color: lightgray;
+  border: 1px solid black;
+  color: black;
+}
+
+.short-news-link:hover {
+  background-color: grey;
+  color: white;
 }

@@ -3,9 +3,11 @@
   <div class="short-news-text">
     <div class="short-news-header">
       <h3 class="short-news-heading">{{newsItem.heading}}</h3>
-      <p class="short-news-date">Date: {{newsItem.date | date:"MM/dd/yy"}}</p>
+      <p class="short-news-date">{{newsItem.date | date:"MM/dd/yy"}}</p>
     </div>
     <p class="short-news-description">{{newsItem.description}}</p>
-    <a routerLink="/view/{{newsItem.sourceId}}/{{newsItem.id}}" class="short-news-link">Read more...</a>
+    <div>
+      <a routerLink="/view/{{newsItem.sourceId}}/{{newsItem.id}}" class="short-news-link">Read more...</a>
+    </div>
   </div>
 </li>

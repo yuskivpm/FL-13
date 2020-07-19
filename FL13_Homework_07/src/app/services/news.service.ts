@@ -42,6 +42,10 @@ export class NewsService {
     return of(SOURCES);
   }
 
+  getSourceById(sourceId: number): Observable<NewsSource> {
+    return of(SOURCES.find(({ id }) => id === sourceId));
+  }
+
   // private handleError<T>(operation: string, defaultResult?: T) {
   //   return (error: any): Observable<T> => {
   //     console.error(`Fail in ${operation}`, error);

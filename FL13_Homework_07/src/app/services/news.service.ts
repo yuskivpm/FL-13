@@ -14,13 +14,19 @@ import { NEWS, SOURCES } from '../mock/mock.news';
 export class NewsService {
   constructor(/* private http: HttpClient */) {}
 
-  getNews(selectedSourceId: number): Observable<News[]> {
+  getNews(
+    selectedSourceId: number,
+    filterText: string = ''
+  ): Observable<News[]> {
     // return this.http
     //   .get<News[]>(`${NEWS_API}`)
     //   .pipe(catchError(this.handleError<News[]>('getNews', [])));
+    const filterRegexp = new RegExp(filterText, 'i');
     return of(
       NEWS.filter(
-        ({ sourceId }) => !selectedSourceId || sourceId === selectedSourceId
+        ({ sourceId, heading, description }) =>
+          (!selectedSourceId || sourceId === selectedSourceId) &&
+          (filterRegexp.test(heading) || filterRegexp.test(description))
       )
     );
   }
@@ -34,10 +40,6 @@ export class NewsService {
     //   .get<NewsSource[]>(`${SOURCES_API}`)
     //   .pipe(catchError(this.handleError<NewsSource[]>('getSources', [])));
     return of(SOURCES);
-  }
-
-  getSourceById(sourceId: number): Observable<NewsSource> {
-    return of(SOURCES.find(({ id }) => id === sourceId));
   }
 
   // private handleError<T>(operation: string, defaultResult?: T) {

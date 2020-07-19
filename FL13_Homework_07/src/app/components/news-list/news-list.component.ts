@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 
 import { News } from '../../interfaces/News';
 import { NewsSource } from '../../interfaces/NewsSource';
 import { NewsService } from '../../services/news.service';
-import { PARAM_SOURCE_ID, ALL_SOURCES } from '../../constants/common';
+import {
+  PARAM_SOURCE_ID,
+  ALL_SOURCES,
+  NEWS_LIST_BASE_URL,
+} from '../../constants/common';
 
 const EMPTY_SOURCE: NewsSource = { id: 0, name: '' };
 
@@ -18,40 +21,49 @@ const EMPTY_SOURCE: NewsSource = { id: 0, name: '' };
 export class NewsListComponent implements OnInit {
   sourcesList: NewsSource[] = [];
   newsList: News[] = [];
-  sourceId: number = 0;
   currentSource: NewsSource;
-  selectSourceId: FormControl = new FormControl(0);
+  selectSourceId: FormControl = new FormControl();
+  filter: FormControl = new FormControl('');
 
   constructor(
     private newsService: NewsService,
     private route: ActivatedRoute,
-    private location: Location
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    selectSourceId.this.sourceId = +this.route.snapshot.paramMap.get(
-      PARAM_SOURCE_ID
-    );
     this.getSources();
-    this.getNews(this.sourceId);
+    const sourceId = +this.route.snapshot.paramMap.get(PARAM_SOURCE_ID);
+    this.selectSourceId.setValue(sourceId);
+    this.initData(sourceId);
+    this.selectSourceId.valueChanges.subscribe((newSourceId) => {
+      this.router
+        .navigate([`/${NEWS_LIST_BASE_URL}/${newSourceId}`])
+        .then((_) => this.initData(+newSourceId));
+    });
   }
 
-  getNews(sourceId: number = this.sourceId): void {
+  initData(sourceId: number) {
+    this.getNews(sourceId);
+    this.getSourceName(sourceId);
+  }
+
+  getNews(
+    sourceId: number = this.selectSourceId.value,
+    filterText: string = this.filter.value
+  ): void {
     this.newsService
-      .getNews(sourceId)
+      .getNews(+sourceId, filterText)
       .subscribe((news) => (this.newsList = news));
   }
 
   getSources(): void {
     this.newsService.getSources().subscribe((sources) => {
       this.sourcesList = [ALL_SOURCES, ...sources];
-      this.getSourceName();
     });
   }
 
-  getSourceName(): void {
-    this.newsService
-      .getSourceById(+this.sourceId)
-      .subscribe((source) => (this.currentSource = source));
+  getSourceName(newSourceId: number = 0): void {
+    this.currentSource = this.sourcesList.find(({ id }) => id === newSourceId);
   }
 }

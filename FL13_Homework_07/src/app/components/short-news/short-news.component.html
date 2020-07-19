@@ -2,10 +2,10 @@
   <img src="{{newsItem.imageUrl}}" alt="news image" class="short-news-image">
   <div class="short-news-text">
     <div class="short-news-header">
-      <h3 class="short-news-heading">id: {{newsItem.id}} heading: {{newsItem.heading}}</h3>
-      <p class="short-news-date">date: {{newsItem.date | date:"MM/dd/yy"}}</p>
+      <h3 class="short-news-heading">{{newsItem.heading}}</h3>
+      <p class="short-news-date">Date: {{newsItem.date | date:"MM/dd/yy"}}</p>
     </div>
-    <p class="short-news-description">description: {{newsItem.description}}</p>
+    <p class="short-news-description">{{newsItem.description}}</p>
     <a routerLink="/view/{{newsItem.sourceId}}/{{newsItem.id}}" class="short-news-link">Read more...</a>
   </div>
 </li>

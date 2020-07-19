@@ -1,19 +1,16 @@
-<div>
-  <!-- <form [formGroup]="headerForm"> -->
-  <h2>{{currentSource ? currentSource.name : 'Select source from list'}}</h2>
-  <select [(ngModel)]="sourceId" (change)="getSourceName()">
-    <!-- <select [formControlName]="sourceId"> -->
-    <option *ngFor="let source of sourcesList" [value]="source.id" [selected]="source.id === sourceId">
+<h2>{{currentSource ? currentSource.name : 'Select source from list'}}</h2>
+<div class="header">
+  <select [formControl]="selectSourceId">
+    <option *ngFor="let source of sourcesList" [value]="source.id" [selected]="source.id === selectSourceId.value">
       {{source.name}}
     </option>
   </select>
   <label>
     Filter:
-    <!-- <input value="{{filter}}" placeholder="Filter keyword"> -->
+    <input [formControl]="filter" placeholder="Filter keyword">
   </label>
-  <button>Filter</button>
-  <a *ngIf="sourceId > 0" routerLink="/add/{{sourceId}}">Add Article</a>
-  <!-- </form> -->
+  <button (click)="getNews()">Filter</button>
+  <a *ngIf="selectSourceId.value > 0" routerLink="/add/{{selectSourceId.value}}">Add Article</a>
 </div>
 
 <ul class="news-list">

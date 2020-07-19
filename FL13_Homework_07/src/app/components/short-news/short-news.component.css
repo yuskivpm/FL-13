@@ -21,6 +21,14 @@
   justify-content: space-between;
 }
 
+.short-news-heading {
+  margin: 5px 0;
+}
+
 p {
   margin: 0;
+}
+
+.short-news-link {
+  font-weight: bold;
 }

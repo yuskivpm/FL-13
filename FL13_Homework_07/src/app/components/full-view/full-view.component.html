@@ -1,13 +1,13 @@
 <h2 class="source-name">{{sourceName}}</h2>
 <div *ngIf="newsDetail" class="full-view-news">
-  <img src="{{newsDetail.imageUrl}}" alt="news image" class="full-view-news-image">
-  <div class="full-view-news-container">
-    <h3 class="full-view-news-heading">{{newsDetail.heading}}</h3>
-    <p class="full-view-news-description">{{newsDetail.description}}</p>
-    <p class="full-view-news-content">{{newsDetail.content}}</p>
-    <p class="full-view-news-date">{{newsDetail.date | date:"MM/dd/yy"}}</p>
-    <p class="full-view-news-author">{{newsDetail.author}}</p>
-  </div>
+    <img src="{{newsDetail.imageUrl}}" alt="news image" class="full-view-news-image">
+    <div class="full-view-news-container">
+        <h3 class="full-view-news-heading">{{newsDetail.heading}}</h3>
+        <p class="full-view-news-description">{{newsDetail.description}}</p>
+        <p class="full-view-news-content">{{newsDetail.content}}</p>
+        <p class="full-view-news-date">{{newsDetail.date | date:"MM/dd/yy"}}</p>
+        <p class="full-view-news-author">{{newsDetail.author}}</p>
+    </div>
 </div>
 
 <p *ngIf="error" class="full-view-news-error">{{error}}</p>
@@ -15,5 +15,5 @@
 <p *ngIf="!newsDetail && !error" class="full-view-news-loading">Loading...</p>
 
 <div class="container-back-button">
-  <a routerLink="/list/{{sourceId}}" class="back-button">Back</a>
+    <a routerLink="/list/{{sourceId}}" class="back-button">Back</a>
 </div>

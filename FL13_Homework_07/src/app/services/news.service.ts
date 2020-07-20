@@ -1,27 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-// import { catchError, map, tap } from 'rxjs/operators';
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 import { News } from '../interfaces/News';
 import { NewsSource } from '../interfaces/NewsSource';
-// import { NEWS_API, SOURCES_API } from '../constants/common';
 import { NEWS, SOURCES } from '../mock/mock.news';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NewsService {
-  constructor(/* private http: HttpClient */) {}
+  constructor() { }
 
   getNews(
     selectedSourceId: number,
     filterText: string = ''
   ): Observable<News[]> {
-    // return this.http
-    //   .get<News[]>(`${NEWS_API}`)
-    //   .pipe(catchError(this.handleError<News[]>('getNews', [])));
-    const filterRegexp = new RegExp(filterText, 'i');
+    const filterRegexp: RegExp = new RegExp(filterText, 'i');
     return of(
       NEWS.filter(
         ({ sourceId, heading, description }) =>
@@ -31,14 +26,16 @@ export class NewsService {
     );
   }
 
-  getNewsById(newsId: number): Observable<News> {
-    return of(NEWS.find(({ id }) => id === newsId));
+  getNewsById(forSourceId: number, newsId: number): Observable<News> {
+    return of(
+      NEWS.find(
+        ({ id, sourceId }) =>
+          id === newsId && (!forSourceId || sourceId === forSourceId)
+      )
+    );
   }
 
   getSources(): Observable<NewsSource[]> {
-    // return this.http
-    //   .get<NewsSource[]>(`${SOURCES_API}`)
-    //   .pipe(catchError(this.handleError<NewsSource[]>('getSources', [])));
     return of(SOURCES);
   }
 
@@ -46,10 +43,24 @@ export class NewsService {
     return of(SOURCES.find(({ id }) => id === sourceId));
   }
 
-  // private handleError<T>(operation: string, defaultResult?: T) {
-  //   return (error: any): Observable<T> => {
-  //     console.error(`Fail in ${operation}`, error);
-  //     return of(defaultResult as T);
-  //   };
-  // }
+  getNewId(forSourceId: number): number {
+    return (
+      1 +
+      NEWS.reduce(
+        (maxId, { id, sourceId }) =>
+          sourceId === forSourceId && id > maxId ? id : maxId,
+        0
+      )
+    );
+  }
+
+  addNews(news: News): Observable<News> {
+    return this.getSourceById(news.sourceId).pipe(
+      map<NewsSource, News>((currentSource) => {
+        news.id = this.getNewId(currentSource.id);
+        NEWS.push({ ...news });
+        return news;
+      })
+    );
+  }
 }

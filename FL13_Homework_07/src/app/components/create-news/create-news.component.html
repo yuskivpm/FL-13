@@ -1,53 +1,56 @@
-<h2>Create news</h2>
-<form *ngIf="news">
-  <label>
-    id:
-    <br>
-    <input [(ngModel)]="news.id" placeholder="id">
-  </label>
-  <br>
-  <label>
-    sourceId:
-    <br>
-    <input [(ngModel)]="news.sourceId" placeholder="sourceId">
-  </label>
-  <br>
-  <label>
-    imageUrl:
-    <br>
-    <input [(ngModel)]="news.imageUrl" placeholder="imageUrl">
-  </label>
-  <br>
-  <label>
-    heading:
-    <br>
-    <input [(ngModel)]="news.heading" placeholder="heading">
-  </label>
-  <br>
-  <label>
-    description:
-    <br>
-    <input [(ngModel)]="news.description" placeholder="description">
-  </label>
-  <br>
-  <label>
-    content:
-    <br>
-    <textarea [(ngModel)]="news.content"></textarea>
-  </label>
-  <br>
-  <label>
-    date:
-    <br>
-    <input [(ngModel)]="news.date" type="date" placeholder="date">
-  </label>
-  <br>
-  <label>
-    author:
-    <br>
-    <input [(ngModel)]="news.author" placeholder="author">
-  </label>
-  <br>
-  <button (click)="onSave()">Save</button>
-  <a routerLink="/list/{{news.sourceId}}">Cancel</a>
-</form>
+<h2 class="create-news-header">Create news for {{sourceName}}</h2>
+<div [ngSwitch]="spinner">
+    <form *ngSwitchCase="false" [formGroup]="newsForm" (ngSubmit)="onSave()" class="create-form">
+        <div class="col">
+            <label>
+                Heading:
+                <br>
+                <input #fHead formControlName="heading" placeholder="Enter heading" type="text"
+                    title="{{getValidationError('heading')}}">
+            </label>
+            <br>
+            <label>
+                Description:
+                <br>
+                <input formControlName="description" placeholder="Enter short description" type="text"
+                    title="{{getValidationError('description')}}">
+            </label>
+            <br>
+            <label>
+                Content:
+                <br>
+                <textarea formControlName="content" title="{{getValidationError('content')}}"></textarea>
+            </label>
+        </div>
+        <div class="col">
+            <label>
+                Date:
+                <br>
+                <input formControlName="date" placeholder="Enter news date" type="date"
+                    title="{{getValidationError('date')}}">
+            </label>
+            <br>
+            <label>
+                Author:
+                <br>
+                <input formControlName="author" placeholder="Enter author" type="text"
+                    title="{{getValidationError('author')}}">
+            </label>
+            <br>
+            <label>
+                Image Url:
+                <br>
+                <input formControlName="imageUrl" placeholder="Enter URL to image" type="text"
+                    title="{{getValidationError('imageUrl')}}">
+            </label>
+            <div class="buttons">
+                <button type="submit" [disabled]="!newsForm.valid">Save</button>
+                <button (click)="onCancel()">Cancel</button>
+
+            </div>
+        </div>
+    </form>
+    <div *ngSwitchCase="true">
+        <p>Saving...</p>
+    </div>
+</div>

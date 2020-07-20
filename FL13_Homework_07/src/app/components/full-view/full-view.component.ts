@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { News } from '../../interfaces/News';
@@ -7,6 +7,7 @@ import {
   PARAM_SOURCE_ID,
   PARAM_NEWS_ID,
   EMPTY_SOURCE,
+  FULL_VIEW_FAIL_LOAD_DATA,
 } from '../../constants/common';
 
 @Component({
@@ -23,22 +24,24 @@ export class FullViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private newsService: NewsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.sourceId = +(this.route.snapshot.paramMap.get(PARAM_SOURCE_ID) || 0);
     this.getNewsById(+this.route.snapshot.paramMap.get(PARAM_NEWS_ID));
   }
 
-  getNewsById(newsId: number) {
-    this.newsService.getNewsById(newsId).subscribe((news) => {
+  getNewsById(newsId: number): void {
+    this.newsService.getNewsById(this.sourceId, newsId).subscribe((news) => {
       if (news) {
         this.newsDetail = news;
         this.newsService
           .getSourceById(news.sourceId)
-          .subscribe(({ name } = EMPTY_SOURCE) => (this.sourceName = name));
+          .subscribe(
+            ({ name } = { ...EMPTY_SOURCE }) => (this.sourceName = name)
+          );
       } else {
-        this.error = 'Fail load data';
+        this.error = FULL_VIEW_FAIL_LOAD_DATA;
       }
     });
   }

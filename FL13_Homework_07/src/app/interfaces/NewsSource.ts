@@ -1,4 +1,5 @@
-export interface NewsSource {
-  id: number;
+import { ItemWithId } from './ItemWithId';
+
+export interface NewsSource extends ItemWithId {
   name: string;
 }

@@ -9,6 +9,7 @@ import {
   PARAM_SOURCE_ID,
   ALL_SOURCES,
   NEWS_LIST_BASE_URL,
+  NEWS_ADD_BASE_URL,
 } from '../../constants/common';
 
 @Component({
@@ -27,7 +28,7 @@ export class NewsListComponent implements OnInit {
     private newsService: NewsService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getSources();
@@ -41,7 +42,7 @@ export class NewsListComponent implements OnInit {
     });
   }
 
-  initData(sourceId: number) {
+  initData(sourceId: number): void {
     this.getNews(sourceId);
     this.getSourceName(sourceId);
   }
@@ -56,12 +57,16 @@ export class NewsListComponent implements OnInit {
   }
 
   getSources(): void {
-    this.newsService.getSources().subscribe((sources) => {
-      this.sourcesList = [ALL_SOURCES, ...sources];
-    });
+    this.newsService.getSources().subscribe((sources) =>
+      this.sourcesList = [{ ...ALL_SOURCES }, ...sources]
+    );
   }
 
   getSourceName(newSourceId: number = 0): void {
     this.currentSource = this.sourcesList.find(({ id }) => id === newSourceId);
+  }
+
+  addNews(): void {
+    this.router.navigate([`/${NEWS_ADD_BASE_URL}/${this.currentSource.id}`]);
   }
 }

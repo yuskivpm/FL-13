@@ -1,27 +1,36 @@
 .news-list {
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    list-style: none;
 }
 
 app-short-news {
-  width: 80%;
+    width: 80%;
 }
 
 h2 {
-  text-align: center;
-  border: 1px solid black;
-  background-color: grey;
-  padding: 10px;
-  margin: 0;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid black;
+    background-color: grey;
+    text-align: center;
 }
 
 .header {
-  display: flex;
-  justify-content: space-evenly;
-  border: 1px solid black;
-  background-color: lightgray;
-  padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid black;
+    background-color: lightgray;
+    padding: 10px;
+}
+
+.empty-list {
+    padding: 10px;
+    border: 1px solid black;
+    background-color: red;
+    text-align: center;
+    font-weight: bold;
+    color: white;
 }

@@ -10,7 +10,7 @@ import { News } from '../../interfaces/News';
 export class ShortNewsComponent implements OnInit {
   @Input() newsItem: News;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

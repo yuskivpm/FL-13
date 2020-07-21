@@ -1,0 +1,33 @@
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+table {
+  font-family: 'Courier', Courier, monospace;
+  font-size: 14px;
+  margin-left: 20px;
+}
+
+td {
+  padding-right: 30px;
+}
+
+input, select {
+  margin-left: 10px;
+}
+
+.container {
+  font-size: 16px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.card-metadata {
+  margin: 20px 0;
+}

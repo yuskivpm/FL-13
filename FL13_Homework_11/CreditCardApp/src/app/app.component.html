@@ -1,0 +1,80 @@
+<div class="container">
+  <h1>Credit Card Validator</h1>
+
+  <div class="card-metadata">
+    <table>
+      <tbody>
+        <tr>
+          <td>American Express</td>
+          <td>3400 0000 0000 009</td>
+        </tr>
+        <tr>
+          <td>Carte Blanche</td>
+          <td>3000 0000 0000 04</td>
+        </tr>
+        <tr>
+          <td>Discover</td>
+          <td>6011 0000 0000 0004</td>
+        </tr>
+        <tr>
+          <td>Diners Club</td>
+          <td>3852 0000 0232 37</td>
+        </tr>
+        <tr>
+          <td>enRoute</td>
+          <td>2014 0000 0000 009</td>
+        </tr>
+        <tr>
+          <td>JCB</td>
+          <td>3530 111333300000</td>
+        </tr>
+        <tr>
+          <td>MasterCard</td>
+          <td>5500 0000 0000 0004</td>
+        </tr>
+        <tr>
+          <td>Solo</td>
+          <td>6334 0000 0000 0004</td>
+        </tr>
+        <tr>
+          <td>Switch</td>
+          <td>4903 0100 0000 0009</td>
+        </tr>
+        <tr>
+          <td>Visa</td>
+          <td>4111 1111 1111 1111</td>
+        </tr>
+        <tr>
+          <td>Laser</td>
+          <td>6304 1000 0000 0008</td>
+        </tr>
+        <tr>
+          <td>Spam number</td>
+          <td>5490 9977 7109 2064</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <form #form=ngForm>
+    <div class="form-group">
+      <label for="type">Select credit card:</label>
+      <select required id="type" name="type" [(ngModel)]="cardType">
+        <option *ngFor="let card of cardList" [value]="card.name">
+          {{ card.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cardNumber">Enter number:</label>
+      <input required minlength="12" type="text" id="number" name="number" [(ngModel)]="cardNumber" autocomplete="off">
+    </div>
+
+    <button type="submit" (click)="checkCreditCard()" [disabled]="form.invalid">Check</button>
+  </form>
+
+  <div *ngIf="showNitification" class="notification">
+    <h3>{{ message }}</h3>
+  </div>
+</div>
